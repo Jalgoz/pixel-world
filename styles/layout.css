@@ -289,6 +289,10 @@
     animation: fadeInUp 0.4s ease forwards;
 }
 
+.profile-result:empty {
+    display: none;
+}
+
 .profile-result__title {
     font-size: var(--font-size-xl);
     margin-bottom: var(--space-2);

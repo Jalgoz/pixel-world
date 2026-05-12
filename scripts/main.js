@@ -1,7 +1,7 @@
 // Main application entry point.
-// Phase 9: Scroll behavior and chapter activation.
+// Phase 10: Progress tracking and final profile interaction.
 
-import { initState, subscribe } from './state/story-state.js';
+import { initState } from './state/story-state.js';
 import { initChapterObserver } from './controllers/chapter-observer.controller.js';
 import { initTheme } from './controllers/theme.controller.js';
 import { initScene } from './controllers/scene.controller.js';
@@ -17,10 +17,6 @@ function initApp() {
     initNavigation();
     initProgress();
     initPlayerProfile();
-
-    subscribe((state) => {
-        console.log('State changed:', state.activeChapter, state.activeTheme);
-    });
 }
 
 document.addEventListener('DOMContentLoaded', initApp);

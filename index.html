@@ -12,7 +12,7 @@
 <body>
     <a class="sr-only" href="#main-content">Saltar al contenido principal</a>
 
-    <div class="progress-bar" aria-hidden="true">
+    <div class="progress-bar" role="progressbar" aria-label="Progreso de lectura" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
         <div class="progress-bar__fill"></div>
     </div>
 
@@ -132,12 +132,12 @@
                 <h2 id="profile-title">Que tipo de jugador eres?</h2>
                 <p>Elige el perfil que mejor describe como vives la experiencia de juego.</p>
                 <div class="grid gap-4" role="group" aria-label="Perfiles de jugador">
-                    <button class="profile-option" type="button" data-profile="explorador">Explorador</button>
-                    <button class="profile-option" type="button" data-profile="competitivo">Competitivo</button>
-                    <button class="profile-option" type="button" data-profile="creativo">Creativo</button>
-                    <button class="profile-option" type="button" data-profile="narrativo">Narrativo</button>
+                    <button class="profile-option" type="button" data-profile="explorador" aria-pressed="false" aria-controls="profile-result">Explorador</button>
+                    <button class="profile-option" type="button" data-profile="competitivo" aria-pressed="false" aria-controls="profile-result">Competitivo</button>
+                    <button class="profile-option" type="button" data-profile="creativo" aria-pressed="false" aria-controls="profile-result">Creativo</button>
+                    <button class="profile-option" type="button" data-profile="narrativo" aria-pressed="false" aria-controls="profile-result">Narrativo</button>
                 </div>
-                <div class="profile-result" aria-live="polite"></div>
+                <div class="profile-result" id="profile-result" aria-live="polite" tabindex="-1"></div>
             </div>
         </section>
     </main>

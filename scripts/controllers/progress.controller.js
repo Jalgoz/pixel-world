@@ -2,15 +2,30 @@
 
 let progressBar = null;
 let progressFill = null;
+let animationFrame = null;
 
 function updateProgress() {
     const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = (scrollTop / docHeight) * 100;
+    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollableHeight > 0 ? (scrollTop / scrollableHeight) * 100 : 0;
+    const clampedProgress = Math.min(100, Math.max(0, progress));
 
     if (progressFill) {
-        progressFill.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+        progressFill.style.width = `${clampedProgress}%`;
     }
+
+    if (progressBar) {
+        progressBar.setAttribute('aria-valuenow', String(Math.round(clampedProgress)));
+    }
+}
+
+function requestProgressUpdate() {
+    if (animationFrame) return;
+
+    animationFrame = window.requestAnimationFrame(() => {
+        updateProgress();
+        animationFrame = null;
+    });
 }
 
 export function initProgress() {
@@ -19,10 +34,17 @@ export function initProgress() {
 
     if (!progressBar || !progressFill) return;
 
-    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('scroll', requestProgressUpdate, { passive: true });
+    window.addEventListener('resize', requestProgressUpdate);
     updateProgress();
 }
 
 export function destroyProgress() {
-    window.removeEventListener('scroll', updateProgress);
+    window.removeEventListener('scroll', requestProgressUpdate);
+    window.removeEventListener('resize', requestProgressUpdate);
+
+    if (animationFrame) {
+        window.cancelAnimationFrame(animationFrame);
+        animationFrame = null;
+    }
 }

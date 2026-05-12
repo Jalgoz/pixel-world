@@ -6,52 +6,71 @@ import { setSelectedProfile } from '../state/story-state.js';
 let profileOptions = null;
 let resultContainer = null;
 
+function createResultContent(profile) {
+    const title = document.createElement('h3');
+    title.className = 'profile-result__title';
+    title.textContent = profile.label;
+
+    const description = document.createElement('p');
+    description.className = 'profile-result__description';
+    description.textContent = profile.description;
+
+    return [title, description];
+}
+
+function updateSelectedOption(selectedProfileId) {
+    profileOptions.forEach(option => {
+        const isSelected = option.dataset.profile === selectedProfileId;
+        option.classList.toggle('profile-option--selected', isSelected);
+        option.setAttribute('aria-pressed', String(isSelected));
+    });
+}
+
 function showProfileResult(profileId) {
     const profile = playerProfiles.find(p => p.id === profileId);
     if (!profile || !resultContainer) return;
 
-    resultContainer.innerHTML = `
-        <h3 class="profile-result__title">${profile.label}</h3>
-        <p class="profile-result__description">${profile.description}</p>
-    `;
+    resultContainer.replaceChildren(...createResultContent(profile));
 
     resultContainer.classList.add('is-visible');
     setSelectedProfile(profileId);
 }
 
+function selectProfile(option) {
+    const profileId = option.dataset.profile;
+    if (!profileId) return;
+
+    updateSelectedOption(profileId);
+    showProfileResult(profileId);
+    resultContainer?.focus({ preventScroll: true });
+}
+
+function focusOptionByOffset(currentOption, offset) {
+    const currentIndex = profileOptions.indexOf(currentOption);
+    if (currentIndex === -1) return;
+
+    const nextIndex = (currentIndex + offset + profileOptions.length) % profileOptions.length;
+    profileOptions[nextIndex].focus();
+}
+
 export function initPlayerProfile() {
-    profileOptions = document.querySelectorAll('.profile-option');
+    profileOptions = [...document.querySelectorAll('.profile-option')];
     resultContainer = document.querySelector('.profile-result');
 
     if (!profileOptions.length) return;
 
     profileOptions.forEach(option => {
-        option.addEventListener('click', () => {
-            const profileId = option.dataset.profile;
+        option.addEventListener('click', () => selectProfile(option));
+        option.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                event.preventDefault();
+                focusOptionByOffset(option, 1);
+            }
 
-            // Remove selected state from all
-            profileOptions.forEach(opt => {
-                opt.classList.remove('profile-option--selected');
-            });
-
-            // Add selected state to clicked
-            option.classList.add('profile-option--selected');
-
-            // Show result
-            showProfileResult(profileId);
-        });
-    });
-
-    // Keyboard support
-    profileOptions.forEach(option => {
-        option.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                option.click();
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                event.preventDefault();
+                focusOptionByOffset(option, -1);
             }
         });
-
-        option.setAttribute('tabindex', '0');
-        option.setAttribute('role', 'button');
     });
 }
