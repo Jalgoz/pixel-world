@@ -1,35 +1,113 @@
-/* Theme Variables - Chapter-specific visual themes */
+/* Theme Variables - Chapter-specific visual themes and atmospheric treatments */
 
 :root {
-    /* Default theme */
+    /* Default theme - base state */
     --theme-bg: var(--color-bg-primary);
     --theme-bg-secondary: var(--color-bg-secondary);
+    --theme-bg-tertiary: var(--color-bg-tertiary);
+    --theme-bg-elevated: var(--color-bg-elevated);
     --theme-text: var(--color-text-primary);
+    --theme-text-secondary: var(--color-text-secondary);
+    --theme-text-muted: var(--color-text-muted);
     --theme-accent: var(--color-accent);
+    --theme-accent-dim: var(--color-accent-dim);
+    --theme-accent-soft: var(--color-accent-soft);
     --theme-border: var(--color-border);
+    --theme-border-light: var(--color-border-light);
+    --theme-shadow: var(--shadow-md);
+    --theme-glow: var(--shadow-glow);
+    --theme-selection: var(--color-selection);
+    --theme-gradient: radial-gradient(circle at top, rgba(0, 255, 170, 0.08), transparent 30%);
 }
 
-/* Chapter themes - activated via data attribute on body */
+/* ============ Chapter 1: Interaction begins ============ */
 body[data-theme="chapter-1"] {
     --theme-accent: var(--color-chapter-1);
+    --theme-accent-dim: #cc5555;
+    --theme-accent-soft: rgba(255, 107, 107, 0.12);
+    --theme-glow: 0 0 20px rgba(255, 107, 107, 0.3);
+    --theme-gradient: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 107, 107, 0.15), transparent 50%);
 }
 
+/* ============ Chapter 2: Worlds become explorable ============ */
 body[data-theme="chapter-2"] {
     --theme-accent: var(--color-chapter-2);
+    --theme-accent-dim: #3eb3aa;
+    --theme-accent-soft: rgba(78, 205, 196, 0.12);
+    --theme-glow: 0 0 20px rgba(78, 205, 196, 0.3);
+    --theme-gradient: radial-gradient(ellipse 80% 60% at 30% 20%, rgba(78, 205, 196, 0.12), transparent 40%),
+                      radial-gradient(ellipse 60% 40% at 70% 80%, rgba(78, 205, 196, 0.08), transparent 30%);
 }
 
+/* ============ Chapter 3: Space becomes three-dimensional ============ */
 body[data-theme="chapter-3"] {
     --theme-accent: var(--color-chapter-3);
+    --theme-accent-dim: #3593a8;
+    --theme-accent-soft: rgba(69, 183, 209, 0.12);
+    --theme-glow: 0 0 20px rgba(69, 183, 209, 0.3);
+    --theme-gradient: linear-gradient(180deg,
+        rgba(69, 183, 209, 0.1) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(69, 183, 209, 0.06) 100%);
 }
 
+/* ============ Chapter 4: Players become connected ============ */
 body[data-theme="chapter-4"] {
     --theme-accent: var(--color-chapter-4);
+    --theme-accent-dim: #8279cb;
+    --theme-accent-soft: rgba(162, 155, 254, 0.12);
+    --theme-glow: 0 0 20px rgba(162, 155, 254, 0.3);
+    --theme-gradient: radial-gradient(circle at 20% 30%, rgba(162, 155, 254, 0.15), transparent 30%),
+                      radial-gradient(circle at 80% 70%, rgba(162, 155, 254, 0.1), transparent 25%);
 }
 
+/* ============ Chapter 5: Players begin to create ============ */
 body[data-theme="chapter-5"] {
     --theme-accent: var(--color-chapter-5);
+    --theme-accent-dim: #cc6187;
+    --theme-accent-soft: rgba(253, 121, 168, 0.12);
+    --theme-glow: 0 0 20px rgba(253, 121, 168, 0.3);
+    --theme-gradient: linear-gradient(135deg,
+        rgba(253, 121, 168, 0.12) 0%,
+        transparent 40%,
+        rgba(253, 121, 168, 0.06) 100%);
 }
 
+/* ============ Chapter 6: Worlds become reactive ============ */
 body[data-theme="chapter-6"] {
     --theme-accent: var(--color-chapter-6);
+    --theme-accent-dim: #ccb985;
+    --theme-accent-soft: rgba(255, 234, 167, 0.12);
+    --theme-glow: 0 0 20px rgba(255, 234, 167, 0.3);
+    --theme-gradient: radial-gradient(ellipse 100% 80% at 50% 100%, rgba(255, 234, 167, 0.15), transparent 50%),
+                      radial-gradient(circle at 30% 20%, rgba(255, 234, 167, 0.1), transparent 20%);
+}
+
+/* Atmospheric background treatment - applied to body */
+body {
+    background: var(--theme-bg) var(--theme-gradient) no-repeat fixed;
+    background-size: 100% 100vh;
+    transition: background var(--transition-slow);
+}
+
+/* Selection color per theme */
+body ::selection {
+    background: var(--theme-selection);
+}
+
+[data-theme="chapter-1"] ::selection { background: rgba(255, 107, 107, 0.28); }
+[data-theme="chapter-2"] ::selection { background: rgba(78, 205, 196, 0.28); }
+[data-theme="chapter-3"] ::selection { background: rgba(69, 183, 209, 0.28); }
+[data-theme="chapter-4"] ::selection { background: rgba(162, 155, 254, 0.28); }
+[data-theme="chapter-5"] ::selection { background: rgba(253, 121, 168, 0.28); }
+[data-theme="chapter-6"] ::selection { background: rgba(255, 234, 167, 0.28); }
+
+/* Accent glow utility */
+.glow {
+    box-shadow: var(--theme-glow);
+}
+
+.glow-text {
+    text-shadow: 0 0 20px var(--theme-accent);
 }
