@@ -1,6 +1,6 @@
 /* Scenes - Visual metaphors for each chapter */
+/* Each scene uses only CSS (gradients, shapes, animations) to evoke the chapter's theme */
 
-/* Scene Container */
 .scene {
     width: 100%;
     height: 100%;
@@ -9,137 +9,288 @@
     justify-content: center;
     position: relative;
     overflow: hidden;
+    background: var(--color-bg-primary);
 }
 
-/* Chapter 1: Interaction begins - Arcade-style simple geometry */
+.scene::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+/* ============ Chapter 1: Interaction begins ============ */
+/* Minimal geometry, bouncing object, cause and effect */
 .scene--chapter-1 {
-    background: radial-gradient(circle at center, var(--color-bg-secondary) 0%, var(--color-bg-primary) 70%);
+    background: radial-gradient(ellipse at center, var(--color-bg-secondary) 0%, var(--color-bg-primary) 100%);
 }
 
 .scene--chapter-1::before {
+    width: 120px;
+    height: 120px;
+    border: 3px solid var(--color-chapter-1);
+    border-radius: 50%;
+    animation: chapter1-bounce 2s ease-in-out infinite;
+    box-shadow:
+        0 0 20px rgba(255, 107, 107, 0.3),
+        inset 0 0 20px rgba(255, 107, 107, 0.1);
+}
+
+.scene--chapter-1::after {
     content: '';
     position: absolute;
-    width: 100px;
-    height: 100px;
-    border: 4px solid var(--color-chapter-1);
-    border-radius: 50%;
-    animation: bounce 2s ease-in-out infinite;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--color-chapter-1), transparent);
+    opacity: 0.5;
+    border-radius: 2px;
 }
 
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-50px); }
+@keyframes chapter1-bounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    25% { transform: translateY(-60px) scale(1.05); }
+    50% { transform: translateY(0) scale(1); }
+    75% { transform: translateY(-30px) scale(0.95); }
+    100% { transform: translateY(0) scale(1); }
 }
 
-/* Chapter 2: Worlds become explorable - Side-scrolling layered landscape */
+/* ============ Chapter 2: Worlds become explorable ============ */
+/* Layered side-scrolling landscape */
 .scene--chapter-2 {
-    background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+    background: linear-gradient(180deg,
+        var(--color-bg-primary) 0%,
+        #0d1a1a 50%,
+        var(--color-bg-secondary) 100%);
+    overflow: hidden;
 }
 
+/* Parallax layers */
 .scene--chapter-2::before {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 200%;
-    height: 60%;
-    background: repeating-linear-gradient(
-        90deg,
-        transparent 0,
-        transparent 50px,
-        var(--color-chapter-2) 50px,
-        var(--color-chapter-2) 51px
-    );
-    opacity: 0.3;
-    animation: scroll 20s linear infinite;
+    width: 300%;
+    height: 50%;
+    background:
+        linear-gradient(180deg, transparent 0%, rgba(78, 205, 196, 0.03) 100%),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 40px,
+            rgba(78, 205, 196, 0.15) 40px,
+            rgba(78, 205, 196, 0.15) 41px
+        );
+    animation: chapter2-scroll 30s linear infinite;
 }
 
-@keyframes scroll {
+.scene--chapter-2::after {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    left: 10%;
+    width: 30%;
+    height: 30%;
+    background: radial-gradient(ellipse at bottom, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
+    animation: chapter2-float 6s ease-in-out infinite;
+}
+
+@keyframes chapter2-scroll {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
 }
 
-/* Chapter 3: Space becomes three-dimensional - Perspective grid */
+@keyframes chapter2-float {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; }
+    50% { transform: translateY(-20px) translateX(10px); opacity: 1; }
+}
+
+/* ============ Chapter 3: Space becomes three-dimensional ============ */
+/* Perspective grid with depth */
 .scene--chapter-3 {
-    background: var(--color-bg-primary);
+    background:
+        radial-gradient(ellipse at center bottom, rgba(69, 183, 209, 0.08) 0%, transparent 50%),
+        var(--color-bg-primary);
+    perspective: 600px;
+    perspective-origin: 50% 80%;
 }
 
 .scene--chapter-3::before {
-    content: '';
-    position: absolute;
     width: 200%;
     height: 200%;
+    top: 50%;
     background:
-        linear-gradient(var(--color-chapter-3) 1px, transparent 1px),
-        linear-gradient(90deg, var(--color-chapter-3) 1px, transparent 1px);
-    background-size: 40px 40px;
-    opacity: 0.2;
-    transform: perspective(500px) rotateX(60deg);
-    transform-origin: center bottom;
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 30px,
+            rgba(69, 183, 209, 0.12) 30px,
+            rgba(69, 183, 209, 0.12) 31px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 30px,
+            rgba(69, 183, 209, 0.12) 30px,
+            rgba(69, 183, 209, 0.12) 31px
+        );
+    transform: rotateX(70deg) translateY(-50%);
+    transform-origin: center 50%;
+    animation: chapter3-pulse 4s ease-in-out infinite;
 }
 
-/* Chapter 4: Players become connected - Network nodes */
+.scene--chapter-3::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgba(69, 183, 209, 0.5);
+    transform: rotate(45deg);
+    animation: chapter3-spin 8s linear infinite;
+    box-shadow: 0 0 30px rgba(69, 183, 209, 0.2);
+}
+
+@keyframes chapter3-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+@keyframes chapter3-spin {
+    from { transform: rotate(45deg); }
+    to { transform: rotate(405deg); }
+}
+
+/* ============ Chapter 4: Players become connected ============ */
+/* Network nodes with connections */
 .scene--chapter-4 {
-    background: var(--color-bg-primary);
+    background:
+        radial-gradient(circle at 20% 30%, rgba(162, 155, 254, 0.08) 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(162, 155, 254, 0.06) 0%, transparent 25%),
+        var(--color-bg-primary);
 }
 
+/* Connection lines */
 .scene--chapter-4::before {
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(135deg, transparent 45%, rgba(162, 155, 254, 0.2) 45%, rgba(162, 155, 254, 0.2) 55%, transparent 55%),
+        linear-gradient(45deg, transparent 30%, rgba(162, 155, 254, 0.15) 30%, rgba(162, 155, 254, 0.15) 40%, transparent 40%),
+        linear-gradient(90deg, transparent 60%, rgba(162, 155, 254, 0.1) 60%, rgba(162, 155, 254, 0.1) 70%, transparent 70%);
+}
+
+/* Nodes */
+.scene--chapter-4::after {
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
     background-image:
-        radial-gradient(circle at 20% 30%, var(--color-chapter-4) 2px, transparent 2px),
-        radial-gradient(circle at 80% 20%, var(--color-chapter-4) 2px, transparent 2px),
-        radial-gradient(circle at 40% 70%, var(--color-chapter-4) 2px, transparent 2px),
-        radial-gradient(circle at 70% 60%, var(--color-chapter-4) 2px, transparent 2px),
-        radial-gradient(circle at 30% 50%, var(--color-chapter-4) 2px, transparent 2px);
-    animation: pulse 3s ease-in-out infinite;
+        radial-gradient(circle at 20% 25%, var(--color-chapter-4) 4px, transparent 4px),
+        radial-gradient(circle at 50% 40%, var(--color-chapter-4) 6px, transparent 6px),
+        radial-gradient(circle at 80% 30%, var(--color-chapter-4) 4px, transparent 4px),
+        radial-gradient(circle at 30% 60%, var(--color-chapter-4) 5px, transparent 5px),
+        radial-gradient(circle at 70% 70%, var(--color-chapter-4) 3px, transparent 3px),
+        radial-gradient(circle at 50% 80%, var(--color-chapter-4) 4px, transparent 4px);
+    animation: chapter4-pulse 3s ease-in-out infinite;
 }
 
-@keyframes pulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+@keyframes chapter4-pulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.02); }
 }
 
-/* Chapter 5: Players begin to create - Modular blocks */
+/* ============ Chapter 5: Players begin to create ============ */
+/* Modular blocks, grid, building */
 .scene--chapter-5 {
-    background: var(--color-bg-primary);
+    background:
+        linear-gradient(135deg, rgba(253, 121, 168, 0.05) 0%, transparent 50%),
+        var(--color-bg-primary);
 }
 
+/* Grid */
 .scene--chapter-5::before {
-    content: '';
-    position: absolute;
     width: 100%;
     height: 100%;
-    background:
-        linear-gradient(90deg, var(--color-chapter-5) 2px, transparent 2px),
-        linear-gradient(var(--color-chapter-5) 2px, transparent 2px);
-    background-size: 30px 30px;
-    opacity: 0.3;
+    background-image:
+        linear-gradient(90deg, rgba(253, 121, 168, 0.08) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(253, 121, 168, 0.08) 1px, transparent 1px);
+    background-size: 25px 25px;
 }
 
-/* Chapter 6: Worlds become reactive - Dynamic living system */
+/* Building blocks */
+.scene--chapter-5::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 60px;
+    background: rgba(253, 121, 168, 0.15);
+    border: 2px solid var(--color-chapter-5);
+    border-radius: 4px;
+    box-shadow:
+        40px -30px 0 rgba(253, 121, 168, 0.1),
+        40px -30px 0 2px var(--color-chapter-5),
+        -30px 20px 0 rgba(253, 121, 168, 0.12),
+        -30px 20px 0 2px var(--color-chapter-5),
+        80px 30px 0 rgba(253, 121, 168, 0.08),
+        80px 30px 0 2px var(--color-chapter-5);
+    animation: chapter5-build 5s ease-in-out infinite;
+}
+
+@keyframes chapter5-build {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-5px) rotate(1deg); }
+    50% { transform: translateY(0) rotate(0deg); }
+    75% { transform: translateY(5px) rotate(-1deg); }
+}
+
+/* ============ Chapter 6: Worlds become reactive ============ */
+/* Living ecosystem, multiple zones, reactive */
 .scene--chapter-6 {
-    background: var(--color-bg-primary);
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255, 234, 167, 0.08) 0%, transparent 25%),
+        radial-gradient(circle at 70% 60%, rgba(255, 234, 167, 0.06) 0%, transparent 30%),
+        radial-gradient(circle at 50% 90%, rgba(255, 234, 167, 0.04) 0%, transparent 20%),
+        var(--color-bg-primary);
 }
 
+/* Pulsing zones */
 .scene--chapter-6::before {
     content: '';
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 30% 30%, var(--color-chapter-6) 0%, transparent 30%),
-                radial-gradient(circle at 70% 70%, var(--color-chapter-6) 0%, transparent 30%);
-    animation: breathe 4s ease-in-out infinite;
+    width: 60%;
+    height: 60%;
+    border: 1px solid rgba(255, 234, 167, 0.2);
+    border-radius: 30% 70% 50% 50%;
+    animation: chapter6-morph1 6s ease-in-out infinite;
 }
 
-@keyframes breathe {
-    0%, 100% { transform: scale(1); opacity: 0.3; }
-    50% { transform: scale(1.1); opacity: 0.6; }
+.scene--chapter-6::after {
+    content: '';
+    position: absolute;
+    width: 40%;
+    height: 40%;
+    border: 1px solid rgba(255, 234, 167, 0.15);
+    border-radius: 70% 30% 50% 50%;
+    animation: chapter6-morph2 8s ease-in-out infinite reverse;
 }
 
-/* Scene transitions */
+@keyframes chapter6-morph1 {
+    0%, 100% { transform: translate(-20%, -10%) rotate(0deg); opacity: 0.3; }
+    33% { transform: translate(0%, -20%) rotate(10deg); opacity: 0.6; }
+    66% { transform: translate(20%, 0%) rotate(-5deg); opacity: 0.4; }
+}
+
+@keyframes chapter6-morph2 {
+    0%, 100% { transform: translate(30%, 20%) rotate(0deg); opacity: 0.2; }
+    33% { transform: translate(10%, 30%) rotate(-15deg); opacity: 0.5; }
+    66% { transform: translate(-10%, 10%) rotate(10deg); opacity: 0.3; }
+}
+
+/* ============ Scene Transitions ============ */
 .scene {
     opacity: 0;
     transition: opacity var(--transition-slow);
@@ -147,4 +298,42 @@
 
 .scene--active {
     opacity: 1;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 768px) {
+    .scene--chapter-1::before {
+        width: 80px;
+        height: 80px;
+    }
+
+    .scene--chapter-3::after {
+        width: 60px;
+        height: 60px;
+    }
+
+    .scene--chapter-5::after {
+        width: 50px;
+        height: 40px;
+    }
+}
+
+/* ============ Reduced Motion ============ */
+@media (prefers-reduced-motion: reduce) {
+    .scene--chapter-1::before,
+    .scene--chapter-2::before,
+    .scene--chapter-2::after,
+    .scene--chapter-3::before,
+    .scene--chapter-3::after,
+    .scene--chapter-4::after,
+    .scene--chapter-5::after,
+    .scene--chapter-6::before,
+    .scene--chapter-6::after {
+        animation: none;
+    }
+
+    .scene {
+        transition: none;
+        opacity: 1;
+    }
 }
