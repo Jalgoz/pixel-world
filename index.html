@@ -3,11 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Un recorrido visual por la evolucion de la experiencia en los videojuegos, del pixel a los mundos vivos.">
     <title>Del píxel al mundo vivo</title>
     <link rel="stylesheet" href="styles/main.css">
     <script type="module" src="scripts/main.js"></script>
 </head>
 <body>
-    <!-- Contenido por definir en Fase 2 -->
+    <a class="sr-only" href="#main-content">Saltar al contenido principal</a>
+
+    <div class="progress-bar" aria-hidden="true">
+        <div class="progress-bar__fill"></div>
+    </div>
+
+    <header class="hero" id="top">
+        <p class="tag">Scrollytelling interactivo</p>
+        <h1>Del píxel al mundo vivo</h1>
+        <p>
+            Un recorrido visual por como los videojuegos pasaron de reaccionar a un boton
+            a construir mundos que parecen responder por si mismos.
+        </p>
+        <a class="btn btn--primary" href="#story">Comenzar recorrido</a>
+    </header>
+
+    <main id="main-content">
+        <section class="narrative-transition" aria-labelledby="transition-title">
+            <div class="container">
+                <h2 id="transition-title">No es solo grafica, es experiencia</h2>
+                <p>
+                    La historia de los videojuegos no se mide solo en poligonos o resolucion.
+                    Tambien se mide en libertad, profundidad, conexion y respuesta.
+                </p>
+            </div>
+        </section>
+
+        <section class="story-area" id="story" aria-labelledby="story-title">
+            <nav class="chapter-nav" aria-label="Navegacion por capitulos">
+                <button class="chapter-nav__item" type="button" data-chapter="chapter-1">
+                    <span class="sr-only">Capitulo 1</span>
+                </button>
+                <button class="chapter-nav__item" type="button" data-chapter="chapter-2">
+                    <span class="sr-only">Capitulo 2</span>
+                </button>
+                <button class="chapter-nav__item" type="button" data-chapter="chapter-3">
+                    <span class="sr-only">Capitulo 3</span>
+                </button>
+                <button class="chapter-nav__item" type="button" data-chapter="chapter-4">
+                    <span class="sr-only">Capitulo 4</span>
+                </button>
+                <button class="chapter-nav__item" type="button" data-chapter="chapter-5">
+                    <span class="sr-only">Capitulo 5</span>
+                </button>
+                <button class="chapter-nav__item" type="button" data-chapter="chapter-6">
+                    <span class="sr-only">Capitulo 6</span>
+                </button>
+            </nav>
+
+            <div class="story-area__content container">
+                <h2 id="story-title" class="sr-only">Evolucion de la experiencia de juego</h2>
+
+                <article class="chapter card" id="chapter-1" data-chapter="chapter-1">
+                    <p class="tag">Capitulo 1</p>
+                    <h3>El nacimiento de la interaccion</h3>
+                    <p>
+                        Antes de los mundos abiertos, existio una revolucion mas simple:
+                        la pantalla empezo a responder al jugador.
+                    </p>
+                </article>
+
+                <article class="chapter card" id="chapter-2" data-chapter="chapter-2">
+                    <p class="tag">Capitulo 2</p>
+                    <h3>Cuando la pantalla empezo a avanzar</h3>
+                    <p>
+                        El juego dejo de ser una sola prueba estatica y se convirtio
+                        en un camino por recorrer y descubrir.
+                    </p>
+                </article>
+
+                <article class="chapter card" id="chapter-3" data-chapter="chapter-3">
+                    <p class="tag">Capitulo 3</p>
+                    <h3>El salto al espacio</h3>
+                    <p>
+                        La tercera dimension cambio la forma de moverse, orientar la mirada
+                        y habitar un entorno digital.
+                    </p>
+                </article>
+
+                <article class="chapter card" id="chapter-4" data-chapter="chapter-4">
+                    <p class="tag">Capitulo 4</p>
+                    <h3>Jugar dejo de ser solitario</h3>
+                    <p>
+                        Con la conexion en linea, jugar paso de ser individual a convertirse
+                        en una red de competencia, cooperacion y comunidad.
+                    </p>
+                </article>
+
+                <article class="chapter card" id="chapter-5" data-chapter="chapter-5">
+                    <p class="tag">Capitulo 5</p>
+                    <h3>El jugador tambien construye</h3>
+                    <p>
+                        El jugador no solo supera retos: tambien crea, modifica
+                        y da forma al mundo que habita.
+                    </p>
+                </article>
+
+                <article class="chapter card" id="chapter-6" data-chapter="chapter-6">
+                    <p class="tag">Capitulo 6</p>
+                    <h3>Mundos que responden</h3>
+                    <p>
+                        Los sistemas actuales reaccionan a decisiones, conectan variables
+                        y hacen que cada partida se sienta viva.
+                    </p>
+                </article>
+            </div>
+
+            <aside class="story-area__scene" aria-label="Escena visual activa">
+                <div class="scene scene--chapter-1"></div>
+                <div class="scene scene--chapter-2"></div>
+                <div class="scene scene--chapter-3"></div>
+                <div class="scene scene--chapter-4"></div>
+                <div class="scene scene--chapter-5"></div>
+                <div class="scene scene--chapter-6"></div>
+            </aside>
+        </section>
+
+        <section class="final-section" aria-labelledby="profile-title">
+            <div class="container">
+                <h2 id="profile-title">Que tipo de jugador eres?</h2>
+                <p>Elige el perfil que mejor describe como vives la experiencia de juego.</p>
+                <div class="grid gap-4" role="group" aria-label="Perfiles de jugador">
+                    <button class="profile-option" type="button" data-profile="explorador">Explorador</button>
+                    <button class="profile-option" type="button" data-profile="competitivo">Competitivo</button>
+                    <button class="profile-option" type="button" data-profile="creativo">Creativo</button>
+                    <button class="profile-option" type="button" data-profile="narrativo">Narrativo</button>
+                </div>
+                <div class="profile-result" aria-live="polite"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Del píxel al mundo vivo</p>
+            <p class="text-muted">Una experiencia frontend sobre la evolucion del juego digital.</p>
+            <a href="#top">Volver arriba</a>
+        </div>
+    </footer>
 </body>
 </html>
