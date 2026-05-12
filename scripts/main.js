@@ -1,20 +1,10 @@
-// Main application entry point
-// Imports all controllers and initializes the application
+// Main application entry point.
+// Phase 8 initializes the shared state foundation only.
 
-import { initChapterObserver } from './controllers/chapter-observer.controller.js';
-import { initTheme } from './controllers/theme.controller.js';
-import { initScene } from './controllers/scene.controller.js';
-import { initProgress } from './controllers/progress.controller.js';
-import { initNavigation } from './controllers/navigation.controller.js';
-import { initPlayerProfile } from './controllers/player-profile.controller.js';
+import { initState } from './state/story-state.js';
 
 function initApp() {
-    initChapterObserver();
-    initTheme();
-    initScene();
-    initProgress();
-    initNavigation();
-    initPlayerProfile();
+    initState();
 }
 
 document.addEventListener('DOMContentLoaded', initApp);

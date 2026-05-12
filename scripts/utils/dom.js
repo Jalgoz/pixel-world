@@ -1,4 +1,4 @@
-// DOM helpers - Reusable DOM selection and manipulation helpers
+// DOM helpers - small reusable DOM selection and event helpers.
 
 /**
  * Select a single element
@@ -17,7 +17,23 @@ export function $(selector, parent = document) {
  * @returns {NodeList}
  */
 export function $$(selector, parent = document) {
-    return parent.querySelectorAll(selector);
+    return [...parent.querySelectorAll(selector)];
+}
+
+/**
+ * Select a required element and fail early in development.
+ * @param {string} selector - CSS selector
+ * @param {Element|Document} parent - Parent element to search within
+ * @returns {Element}
+ */
+export function requiredElement(selector, parent = document) {
+    const element = $(selector, parent);
+
+    if (!element) {
+        throw new Error(`Required element not found: ${selector}`);
+    }
+
+    return element;
 }
 
 /**
@@ -28,6 +44,8 @@ export function $$(selector, parent = document) {
  * @param {Object} options - Event options
  */
 export function on(element, event, handler, options = {}) {
+    if (!element) return () => {};
+
     element.addEventListener(event, handler, options);
     return () => element.removeEventListener(event, handler, options);
 }
@@ -61,4 +79,15 @@ export function scrollTo(target, options = {}) {
         block: options.block || 'start',
         inline: options.inline || 'nearest'
     });
+}
+
+/**
+ * Toggle a class based on a boolean condition.
+ * @param {Element} element - Target element
+ * @param {string} className - Class name to toggle
+ * @param {boolean} force - Whether the class should be present
+ */
+export function toggleClass(element, className, force) {
+    if (!element) return;
+    element.classList.toggle(className, force);
 }
