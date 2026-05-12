@@ -114,25 +114,25 @@
 .hero.animate-entrance p { animation: fadeInUp 0.6s ease 0.2s forwards; opacity: 0; }
 .hero.animate-entrance .btn { animation: fadeInUp 0.6s ease 0.3s forwards; opacity: 0; }
 
-/* Chapter cards entrance */
-.chapter {
+/* Chapter cards entrance - opt-in for future scroll reveal behavior */
+.chapter[data-reveal] {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.chapter.is-visible {
+.chapter[data-reveal].is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
 /* Staggered delay for multiple chapters */
-.chapter:nth-child(1) { transition-delay: 0s; }
-.chapter:nth-child(2) { transition-delay: 0.1s; }
-.chapter:nth-child(3) { transition-delay: 0.2s; }
-.chapter:nth-child(4) { transition-delay: 0.3s; }
-.chapter:nth-child(5) { transition-delay: 0.4s; }
-.chapter:nth-child(6) { transition-delay: 0.5s; }
+.chapter[data-reveal]:nth-child(1) { transition-delay: 0s; }
+.chapter[data-reveal]:nth-child(2) { transition-delay: 0.1s; }
+.chapter[data-reveal]:nth-child(3) { transition-delay: 0.2s; }
+.chapter[data-reveal]:nth-child(4) { transition-delay: 0.3s; }
+.chapter[data-reveal]:nth-child(5) { transition-delay: 0.4s; }
+.chapter[data-reveal]:nth-child(6) { transition-delay: 0.5s; }
 
 /* Section reveal */
 .section-reveal {
