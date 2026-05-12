@@ -78,11 +78,6 @@
     opacity: 0;
 }
 
-.hero .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-glow);
-}
-
 /* Narrative Transition */
 .narrative-transition {
     padding: var(--space-section) 0;
@@ -218,7 +213,7 @@
 
 .progress-bar__fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--theme-accent), var(--color-accent-dim));
+    background: linear-gradient(90deg, var(--theme-accent), var(--theme-accent-dim));
     width: 0%;
     transition: width 80ms linear;
 }
@@ -277,7 +272,7 @@
 
 .profile-option--selected {
     border-color: var(--theme-accent);
-    background: var(--color-accent-soft);
+    background: var(--theme-accent-soft);
 }
 
 .profile-result {

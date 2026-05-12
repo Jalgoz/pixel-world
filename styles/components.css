@@ -17,19 +17,22 @@
 }
 
 .btn--primary {
-    background: var(--theme-accent);
-    color: var(--color-text-inverse);
+    background: #1a1a24;
+    color: #f0f0f5;
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .btn--primary:hover,
-.btn--primary:focus {
-    opacity: 0.9;
-    transform: translateY(-2px);
-    box-shadow: var(--theme-glow);
+.btn--primary:focus,
+.btn--primary:active {
+    background: #242432;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.38);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
 }
 
 .btn--primary:focus-visible {
-    outline: 2px solid var(--theme-accent);
+    outline: 2px solid rgba(255, 255, 255, 0.6);
     outline-offset: 2px;
 }
 

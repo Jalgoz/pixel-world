@@ -92,3 +92,25 @@
         display: none !important;
     }
 }
+
+/* Hero button keeps a neutral hover, independent from chapter theme colors. */
+.hero .btn.btn--primary,
+.hero .btn.btn--primary:link,
+.hero .btn.btn--primary:visited {
+    background: #1a1a24 !important;
+    color: #f0f0f5 !important;
+    -webkit-text-fill-color: #f0f0f5;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    text-decoration: none;
+}
+
+.hero .btn.btn--primary:hover,
+.hero .btn.btn--primary:focus,
+.hero .btn.btn--primary:active {
+    background: #242432 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.38) !important;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28) !important;
+    text-decoration: none;
+}

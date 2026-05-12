@@ -7,7 +7,8 @@ let navItems = null;
 function scrollToChapter(chapterId) {
     const element = document.querySelector(`[data-chapter="${chapterId}"]`);
     if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        element.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
     }
 }
 
@@ -20,8 +21,10 @@ export function updateNavigation(activeChapterId) {
         const itemChapter = item.dataset.chapter;
         if (itemChapter === activeChapterId) {
             item.classList.add('chapter-nav__item--active');
+            item.setAttribute('aria-current', 'true');
         } else {
             item.classList.remove('chapter-nav__item--active');
+            item.removeAttribute('aria-current');
         }
     });
 }

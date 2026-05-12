@@ -21,17 +21,23 @@
 }
 
 /* ============ Chapter 1: Interaction begins ============ */
-/* Minimal geometry, bouncing object, cause and effect */
+/* Minimal geometry, first responsive pixels on screen */
 .scene--chapter-1 {
     background: radial-gradient(ellipse at center, var(--color-bg-secondary) 0%, var(--color-bg-primary) 100%);
 }
 
 .scene--chapter-1::before {
-    width: 120px;
-    height: 120px;
+    width: 92px;
+    height: 92px;
     border: 3px solid var(--color-chapter-1);
-    border-radius: 50%;
-    animation: chapter1-bounce 2s ease-in-out infinite;
+    border-radius: var(--radius-sm);
+    background:
+        linear-gradient(var(--color-chapter-1), var(--color-chapter-1)) center / 36px 36px no-repeat,
+        repeating-linear-gradient(
+            0deg,
+            rgba(255, 107, 107, 0.08) 0 2px,
+            transparent 2px 10px
+        );
     box-shadow:
         0 0 20px rgba(255, 107, 107, 0.3),
         inset 0 0 20px rgba(255, 107, 107, 0.1);
@@ -48,14 +54,6 @@
     background: linear-gradient(90deg, transparent, var(--color-chapter-1), transparent);
     opacity: 0.5;
     border-radius: 2px;
-}
-
-@keyframes chapter1-bounce {
-    0%, 100% { transform: translateY(0) scale(1); }
-    25% { transform: translateY(-60px) scale(1.05); }
-    50% { transform: translateY(0) scale(1); }
-    75% { transform: translateY(-30px) scale(0.95); }
-    100% { transform: translateY(0) scale(1); }
 }
 
 /* ============ Chapter 2: Worlds become explorable ============ */
