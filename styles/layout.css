@@ -1,0 +1,86 @@
+/* Layout - Page structure, grid, and major section layouts */
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-8);
+}
+
+/* Narrative Transition */
+.narrative-transition {
+    padding: var(--space-20) 0;
+    text-align: center;
+}
+
+/* Scrollytelling Area */
+.story-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    padding: var(--space-8);
+    min-height: 100vh;
+}
+
+.story-area__content {
+    position: relative;
+}
+
+.story-area__scene {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Final Interactive Section */
+.final-section {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-16);
+    text-align: center;
+}
+
+/* Footer */
+.footer {
+    padding: var(--space-8) 0;
+    text-align: center;
+    border-top: 1px solid var(--color-border);
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+    .story-area {
+        grid-template-columns: 1fr;
+    }
+
+    .story-area__scene {
+        position: relative;
+        height: 50vh;
+    }
+
+    h1 {
+        font-size: var(--font-size-2xl);
+    }
+
+    h2 {
+        font-size: var(--font-size-xl);
+    }
+}

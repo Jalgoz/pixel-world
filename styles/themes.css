@@ -1,0 +1,35 @@
+/* Theme Variables - Chapter-specific visual themes */
+
+:root {
+    /* Default theme */
+    --theme-bg: var(--color-bg-primary);
+    --theme-bg-secondary: var(--color-bg-secondary);
+    --theme-text: var(--color-text-primary);
+    --theme-accent: var(--color-accent);
+    --theme-border: var(--color-border);
+}
+
+/* Chapter themes - activated via data attribute on body */
+body[data-theme="chapter-1"] {
+    --theme-accent: var(--color-chapter-1);
+}
+
+body[data-theme="chapter-2"] {
+    --theme-accent: var(--color-chapter-2);
+}
+
+body[data-theme="chapter-3"] {
+    --theme-accent: var(--color-chapter-3);
+}
+
+body[data-theme="chapter-4"] {
+    --theme-accent: var(--color-chapter-4);
+}
+
+body[data-theme="chapter-5"] {
+    --theme-accent: var(--color-chapter-5);
+}
+
+body[data-theme="chapter-6"] {
+    --theme-accent: var(--color-chapter-6);
+}
