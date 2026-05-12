@@ -24,6 +24,7 @@
 /* Hero Section */
 .hero {
     min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -348,24 +349,25 @@
     }
 
     .story-area__scene {
-        position: relative;
-        height: 40vh;
+        position: sticky;
+        top: 0;
+        order: -1;
+        height: 42vh;
+        min-height: 20rem;
+        z-index: var(--z-base);
         border-left: none;
         border-bottom: 1px solid var(--color-border);
     }
 
     .chapter-nav {
-        display: none;
-    }
-
-    .chapter-nav.mobile-visible {
         display: flex;
         left: 50%;
         top: auto;
-        bottom: var(--space-4);
+        bottom: var(--space-3);
         transform: translateX(-50%);
         flex-direction: row;
         padding: var(--space-2) var(--space-4);
+        gap: var(--space-2);
     }
 
     .final-section .grid {
@@ -381,11 +383,22 @@
     }
 
     .hero {
+        min-height: 92vh;
+        min-height: 92svh;
         padding: var(--space-6) var(--space-4);
+    }
+
+    .hero h1 {
+        font-size: var(--font-size-2xl);
     }
 
     .hero p {
         font-size: var(--font-size-base);
+    }
+
+    .hero .btn {
+        width: 100%;
+        max-width: 18rem;
     }
 
     .narrative-transition {
@@ -394,24 +407,46 @@
 
     .story-area__content {
         padding: var(--space-4);
-        gap: var(--space-12);
+        gap: var(--space-8);
     }
 
     .story-area__scene {
-        height: 35vh;
+        display: none;
     }
 
     .chapter {
         padding: var(--space-4);
+        border-radius: var(--radius-md);
+    }
+
+    .chapter h3 {
+        font-size: var(--font-size-lg);
+    }
+
+    .chapter-nav {
+        bottom: var(--space-2);
+    }
+
+    .chapter-nav__item {
+        width: 0.65rem;
+        height: 0.65rem;
     }
 
     .final-section {
         padding: var(--space-12) var(--space-4);
     }
 
+    .final-section h2 {
+        font-size: var(--font-size-xl);
+    }
+
     .profile-option {
         padding: var(--space-4);
         font-size: var(--font-size-base);
+    }
+
+    .profile-result {
+        padding: var(--space-4);
     }
 
     .footer {
@@ -423,5 +458,23 @@
 @media (min-width: 1440px) {
     .story-area__content {
         padding: var(--space-12) var(--space-16);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 var(--space-3);
+    }
+
+    .hero h1 {
+        font-size: clamp(2.35rem, 15vw, 3rem);
+    }
+
+    .story-area__content {
+        padding: var(--space-3);
+    }
+
+    .chapter {
+        padding: var(--space-3);
     }
 }
