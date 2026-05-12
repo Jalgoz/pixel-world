@@ -1,5 +1,6 @@
 // Theme Controller - Updates the active visual theme
 
+import { defaultChapterId, getChapterById } from '../config/chapters.js';
 import { setActiveTheme } from '../state/story-state.js';
 
 let currentTheme = null;
@@ -24,7 +25,12 @@ export function updateTheme(themeName) {
 }
 
 export function initTheme() {
-    // Initial theme setup if needed
+    const firstChapter = getChapterById(defaultChapterId);
+    if (firstChapter) {
+        document.body.setAttribute('data-theme', firstChapter.theme);
+        currentTheme = firstChapter.theme;
+        setActiveTheme(currentTheme);
+    }
 }
 
 export function getCurrentTheme() {

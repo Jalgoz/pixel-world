@@ -6,20 +6,24 @@ import { updateTheme } from './theme.controller.js';
 import { updateScene } from './scene.controller.js';
 import { updateNavigation } from './navigation.controller.js';
 
+let activeChapterId = null;
 let observer = null;
 
 function handleChapterIntersect(entries) {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const chapterId = entry.target.dataset.chapter;
-            const chapter = chapters.find(c => c.id === chapterId);
+            if (chapterId === activeChapterId) return;
 
-            if (chapter) {
-                setActiveChapter(chapterId);
-                updateTheme(chapter.theme);
-                updateScene(chapter.scene);
-                updateNavigation(chapterId);
-            }
+            const chapter = chapters.find(c => c.id === chapterId);
+            if (!chapter) return;
+
+            activeChapterId = chapterId;
+
+            setActiveChapter(chapterId);
+            updateTheme(chapter.theme);
+            updateScene(chapter.scene);
+            updateNavigation(chapterId);
         }
     });
 }
@@ -31,8 +35,8 @@ export function initChapterObserver() {
 
     const options = {
         root: null,
-        rootMargin: '-40% 0px -40% 0px',
-        threshold: 0
+        rootMargin: '-30% 0px -30% 0px',
+        threshold: 0.1
     };
 
     observer = new IntersectionObserver(handleChapterIntersect, options);
