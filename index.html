@@ -156,14 +156,19 @@
                         <span>Narrativo</span>
                     </button>
                 </div>
-                <figure class="profile-showcase" aria-live="polite">
+                <div class="profile-showcase" data-profile-active>
                     <img
                         class="profile-showcase__media"
-                        src="assets/illustrations/profile-narrativo.svg"
-                        alt="Visual del perfil narrativo"
+                        src="assets/images/profile-narrativo.jpg"
+                        alt=""
                         data-profile-media
+                        loading="lazy"
                     >
-                </figure>
+                    <div class="profile-showcase__overlay">
+                        <h3 class="profile-showcase__title" data-overlay-title>Narrativo</h3>
+                        <p class="profile-showcase__desc" data-overlay-desc>Buscas la historia, los personajes y las emociones que solo los mundos virtuales pueden ofrecer.</p>
+                    </div>
+                </div>
                 <div class="profile-result" id="profile-result" aria-live="polite" tabindex="-1"></div>
             </div>
         </section>
