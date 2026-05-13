@@ -73,7 +73,6 @@
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
     --shadow-panel: 0 20px 45px rgba(0, 0, 0, 0.3);
-    --shadow-glow: 0 0 20px rgba(0, 255, 170, 0.3);
 
     /* Layout */
     --content-max-width: 72rem;

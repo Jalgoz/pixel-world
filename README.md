@@ -1,31 +1,54 @@
 # Del píxel al mundo vivo
 
-A premium visual scrollytelling website about the evolution of the videogame experience — from early screen interaction to complex, social and reactive digital worlds.
+Una experiencia visual de scrollytelling sobre cómo los videojuegos pasaron de ser respuestas simples en pantalla a mundos digitales complejos, sociales y reactivos.
 
-Built with HTML5, CSS3, and vanilla JavaScript as a frontend portfolio project demonstrating semantic HTML, responsive layouts, scroll-based storytelling, and maintainable architecture.
+El proyecto está construido como pieza de portfolio frontend: una página editorial, inmersiva y responsive hecha solo con HTML, CSS y JavaScript vanilla.
+
+## Concepto
+
+La pregunta central del sitio es:
+
+> ¿Cómo pasaron los videojuegos de mover píxeles en una pantalla a crear mundos que parecen vivos?
+
+La narrativa evita funcionar como una cronología histórica. En su lugar, presenta seis cambios en la experiencia del jugador:
+
+- Interacción inicial con la pantalla
+- Exploración de mundos laterales
+- Aparición del espacio tridimensional
+- Juego conectado entre personas
+- Creación por parte del jugador
+- Sistemas reactivos que responden a decisiones
+
+## Características
+
+- Hero cinematográfico con entrada editorial
+- Narrativa scroll-driven con seis capítulos
+- Escena visual sticky en desktop
+- Escenas lineales integradas en mobile
+- Metáforas visuales abstractas creadas con CSS
+- Transiciones de tema por capítulo
+- Barra de progreso de lectura
+- Navegación de capítulos accesible
+- Interacción final de perfil de jugador
+- Soporte para teclado y `prefers-reduced-motion`
+- Diseño responsive para desktop, tablet y mobile
 
 ## Stack
 
-- HTML5
-- CSS3 (BEM, custom properties, fluid scales)
-- JavaScript Vanilla (ES Modules)
-- SVG
+- HTML5 semántico
+- CSS3 modular
+- CSS Custom Properties
+- Media Queries
+- JavaScript vanilla
+- ES Modules nativos
+- IntersectionObserver
+- SVG para favicon
 
-## Features
+No usa frameworks, librerías UI, preprocesadores, TypeScript ni librerías de animación.
 
-- Cinematic hero section
-- Scroll-driven narrative with six chapters
-- Abstract visual metaphors for each era
-- Dynamic theme transitions
-- Reading progress indicator
-- Chapter navigation
-- Final interactive player profile section
-- Fully responsive (desktop, tablet, mobile)
-- Keyboard accessible with reduced-motion support
+## Estructura
 
-## Project structure
-
-```
+```text
 ├── assets/
 │   ├── icons/
 │   ├── textures/
@@ -50,38 +73,36 @@ Built with HTML5, CSS3, and vanilla JavaScript as a frontend portfolio project d
     └── utils/
 ```
 
-## Development
+## Desarrollo Local
 
-Run a local static server and open the site from `localhost`.
+El proyecto no requiere instalación ni build. Solo necesita servirse desde un servidor local porque usa ES Modules nativos.
 
-Recommended option if Node.js is installed:
+Con Node.js:
 
 ```bash
 npx --yes http-server . -p 5500
 ```
 
-Then open:
-
-```text
-http://localhost:5500/
-```
-
-Alternative option if Python is correctly installed:
+Con Python:
 
 ```bash
 python -m http.server 5500
 ```
 
-Then open:
+Abrir:
 
 ```text
 http://localhost:5500/
 ```
 
-Do not open `index.html` directly with `file://`, because native ES Modules are blocked by browser CORS rules in that mode.
+No abras `index.html` directamente con `file://`, porque el navegador puede bloquear los módulos JavaScript por reglas CORS.
 
-No build step required.
+## Estado
 
-## License
+Proyecto completo hasta la fase final de pulido.
+
+Incluye estructura, HTML, sistema visual, escenas, movimiento CSS, comportamiento JavaScript, responsive review, accesibilidad básica y README final.
+
+## Licencia
 
 MIT
