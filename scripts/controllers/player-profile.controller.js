@@ -4,7 +4,6 @@ import { playerProfiles } from '../config/chapters.js';
 import { setSelectedProfile } from '../state/story-state.js';
 
 let profileOptions = null;
-let resultContainer = null;
 let showcaseElement = null;
 let showcaseImage = null;
 let overlayTitle = null;
@@ -29,18 +28,6 @@ const profileMediaMap = {
     }
 };
 
-function createResultContent(profile) {
-    const title = document.createElement('h3');
-    title.className = 'profile-result__title';
-    title.textContent = profile.label;
-
-    const description = document.createElement('p');
-    description.className = 'profile-result__description';
-    description.textContent = profile.description;
-
-    return [title, description];
-}
-
 function updateSelectedOption(selectedProfileId) {
     profileOptions.forEach(option => {
         const isSelected = option.dataset.profile === selectedProfileId;
@@ -49,31 +36,20 @@ function updateSelectedOption(selectedProfileId) {
     });
 }
 
-function showProfileResult(profileId) {
-    const profile = playerProfiles.find(p => p.id === profileId);
-    if (!profile || !resultContainer) return;
-
-    resultContainer.replaceChildren(...createResultContent(profile));
-
-    resultContainer.classList.add('is-visible');
-    setSelectedProfile(profileId);
-}
-
 function updateShowcase(profileId) {
     const media = profileMediaMap[profileId];
-    if (!media || !showcaseImage) return;
+    if (!media || !showcaseImage || !showcaseElement) return;
 
+    showcaseElement.dataset.profileActive = profileId;
+    showcaseImage.hidden = false;
     showcaseImage.src = media.src;
     showcaseImage.alt = media.alt;
 }
 
-function showProfileResult(profileId) {
+function updateOverlayText(profileId) {
     const profile = playerProfiles.find(p => p.id === profileId);
-    if (!profile || !resultContainer) return;
+    if (!profile) return;
 
-    resultContainer.replaceChildren(...createResultContent(profile));
-
-    resultContainer.classList.add('is-visible');
     setSelectedProfile(profileId);
 
     if (overlayTitle) overlayTitle.textContent = profile.label;
@@ -86,8 +62,8 @@ function selectProfile(option) {
 
     updateSelectedOption(profileId);
     updateShowcase(profileId);
-    showProfileResult(profileId);
-    resultContainer?.focus({ preventScroll: true });
+    updateOverlayText(profileId);
+    option.focus({ preventScroll: true });
 }
 
 function focusOptionByOffset(currentOption, offset) {
@@ -100,11 +76,14 @@ function focusOptionByOffset(currentOption, offset) {
 
 export function initPlayerProfile() {
     profileOptions = [...document.querySelectorAll('.profile-option')];
-    resultContainer = document.querySelector('.profile-result');
     showcaseElement = document.querySelector('.profile-showcase');
     showcaseImage = document.querySelector('[data-profile-media]');
     overlayTitle = document.querySelector('[data-overlay-title]');
     overlayDesc = document.querySelector('[data-overlay-desc]');
+
+    showcaseImage?.addEventListener('error', () => {
+        showcaseImage.hidden = true;
+    });
 
     if (!profileOptions.length) return;
 

@@ -70,7 +70,11 @@ export function initState() {
     setPrefersReducedMotion(motionQuery.matches);
 
     const handleMotionChange = (event) => setPrefersReducedMotion(event.matches);
-    motionQuery.addEventListener('change', handleMotionChange);
+    if (typeof motionQuery.addEventListener === 'function') {
+        motionQuery.addEventListener('change', handleMotionChange);
+        return () => motionQuery.removeEventListener('change', handleMotionChange);
+    }
 
-    return () => motionQuery.removeEventListener('change', handleMotionChange);
+    motionQuery.addListener(handleMotionChange);
+    return () => motionQuery.removeListener(handleMotionChange);
 }
