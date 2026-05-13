@@ -107,18 +107,76 @@
 .story-area {
     position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 44%) minmax(0, 56%);
     gap: 0;
     min-height: 100vh;
+    align-items: start;
 }
 
 .story-area__content {
     position: relative;
     padding: var(--space-gutter);
     padding-right: var(--space-12);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-section);
+    min-height: 100vh;
+}
+
+.story-stage {
+    position: sticky;
+    top: 0;
+}
+
+.chapter-panel {
+    position: absolute;
+    top: 50%;
+    left: var(--space-gutter);
+    right: var(--space-12);
+    opacity: 0;
+    transform: translateY(calc(-50% + 2.2rem)) scale(0.985);
+    filter: blur(8px);
+    pointer-events: none;
+    transition: opacity 500ms ease, transform 600ms ease, filter 500ms ease;
+}
+
+.chapter-panel.is-active {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+    filter: blur(0);
+    pointer-events: auto;
+}
+
+.chapter-panel.card {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+}
+
+.chapter-panel.card:hover {
+    border: 0;
+    box-shadow: none;
+}
+
+.chapter-panel .tag {
+    margin-bottom: var(--space-3);
+}
+
+.chapter-panel .chapter__title {
+    max-width: 18ch;
+}
+
+.chapter-panel .chapter__lead,
+.chapter-panel .chapter__body,
+.chapter-panel .chapter__takeaway,
+.chapter-panel .chapter__keywords {
+    max-width: 48ch;
+}
+
+.story-steps {
+    grid-column: 1 / -1;
+}
+
+.story-step {
+    height: 100vh;
 }
 
 .story-area__scene {
@@ -128,14 +186,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--space-gutter);
+    padding: var(--space-3);
     background: var(--color-bg-secondary);
     border-left: 1px solid var(--color-border);
 }
 
 /* Chapter Cards */
 .chapter {
-    padding: var(--space-6);
+    padding: var(--space-8);
     background: var(--color-bg-secondary);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
@@ -151,15 +209,80 @@
     margin-bottom: var(--space-2);
 }
 
-.chapter h3 {
+.chapter__title {
     margin-bottom: var(--space-3);
-    font-size: var(--font-size-lg);
+    font-size: clamp(1.65rem, 1.25rem + 0.8vw, 2.15rem);
 }
 
-.chapter p {
+.chapter__lead {
+    font-size: clamp(1.08rem, 1.02rem + 0.25vw, 1.2rem);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+}
+
+.chapter__body {
     font-size: var(--font-size-base);
     color: var(--color-text-secondary);
-    margin-bottom: 0;
+    margin-bottom: var(--space-4);
+}
+
+.chapter__takeaway {
+    margin: 0 0 var(--space-4);
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--theme-accent);
+    color: var(--theme-text);
+    font-weight: 600;
+    max-width: 44ch;
+}
+
+.chapter__keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+}
+
+.chapter__keywords li {
+    padding: 0.35rem 0.6rem;
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--theme-text-muted);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--theme-border);
+    border-radius: var(--radius-full);
+}
+
+.chapter__media {
+    display: none;
+    margin: 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--theme-border);
+    position: relative;
+}
+
+.chapter__media-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+}
+
+.chapter__media-image[hidden] {
+    display: none;
+}
+
+.chapter__media-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: var(--space-4);
+    color: #ffffff;
+    font-size: var(--font-size-sm);
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.86));
 }
 
 /* Chapter Navigation */
@@ -469,6 +592,40 @@
         padding-right: var(--space-gutter);
     }
 
+    .story-stage {
+        position: static;
+        top: auto;
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-8);
+    }
+
+    .chapter-panel {
+        position: relative;
+        inset: auto;
+        opacity: 1;
+        transform: none;
+        filter: none;
+        pointer-events: auto;
+    }
+
+    .chapter-panel.card {
+        background: var(--color-bg-secondary);
+        border: 1px solid var(--color-border);
+        box-shadow: none;
+        padding: var(--space-4);
+    }
+
+    .chapter-panel.card:hover {
+        border-color: var(--theme-accent);
+        box-shadow: var(--shadow-panel);
+    }
+
+    .story-steps {
+        display: none;
+    }
+
     .story-area__scene {
         position: sticky;
         top: 0;
@@ -540,8 +697,16 @@
         border-radius: var(--radius-md);
     }
 
-    .chapter h3 {
+    .chapter__title {
         font-size: var(--font-size-lg);
+    }
+
+    .chapter__keywords {
+        margin-bottom: var(--space-4);
+    }
+
+    .chapter__media {
+        display: block;
     }
 
     .chapter-nav {

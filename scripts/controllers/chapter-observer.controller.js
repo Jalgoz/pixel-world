@@ -9,41 +9,63 @@ import { updateNavigation } from './navigation.controller.js';
 let activeChapterId = null;
 let observer = null;
 
-function handleChapterIntersect(entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const chapterId = entry.target.dataset.chapter;
-            if (chapterId === activeChapterId) return;
-
-            const chapter = chapters.find(c => c.id === chapterId);
-            if (!chapter) return;
-
-            activeChapterId = chapterId;
-
-            setActiveChapter(chapterId);
-            updateTheme(chapter.theme);
-            updateScene(chapter.scene);
-            updateNavigation(chapterId);
-        }
+function updateChapterPanel(chapterId) {
+    const panels = document.querySelectorAll('.chapter-panel[data-chapter-panel]');
+    panels.forEach((panel) => {
+        const isActive = panel.dataset.chapterPanel === chapterId;
+        panel.classList.toggle('is-active', isActive);
     });
 }
 
-export function initChapterObserver() {
-    const chapterElements = document.querySelectorAll('.chapter[data-chapter]');
+function handleChapterIntersect(entries) {
+    const visibleEntries = entries.filter((entry) => entry.isIntersecting);
+    if (!visibleEntries.length) return;
 
-    if (!chapterElements.length) return;
+    const bestEntry = visibleEntries.reduce((currentBest, entry) => {
+        if (!currentBest) return entry;
+        return entry.intersectionRatio > currentBest.intersectionRatio ? entry : currentBest;
+    }, null);
+
+    const chapterId = bestEntry?.target?.dataset?.chapter;
+    if (!chapterId || chapterId === activeChapterId) return;
+
+    const chapter = chapters.find(c => c.id === chapterId);
+    if (!chapter) return;
+
+    activeChapterId = chapterId;
+
+    setActiveChapter(chapterId);
+    updateTheme(chapter.theme);
+    updateScene(chapter.scene);
+    updateNavigation(chapterId);
+    updateChapterPanel(chapterId);
+}
+
+export function initChapterObserver() {
+    const stepElements = document.querySelectorAll('.story-step[data-chapter]');
+    const chapterElements = document.querySelectorAll('.chapter[data-chapter]');
+    const observerTargets = stepElements.length ? stepElements : chapterElements;
+
+    if (!observerTargets.length) return;
 
     const options = {
         root: null,
-        rootMargin: '-30% 0px -30% 0px',
-        threshold: 0.1
+        rootMargin: '-35% 0px -35% 0px',
+        threshold: [0, 0.2, 0.4, 0.6, 0.8, 1]
     };
 
     observer = new IntersectionObserver(handleChapterIntersect, options);
 
-    chapterElements.forEach(element => {
+    observerTargets.forEach(element => {
         observer.observe(element);
     });
+
+    if (!activeChapterId) {
+        const initialChapter = chapterElements[0]?.dataset.chapter;
+        if (initialChapter) {
+            updateChapterPanel(initialChapter);
+        }
+    }
 }
 
 export function destroyChapterObserver() {

@@ -9,8 +9,18 @@ import { initNavigation } from './controllers/navigation.controller.js';
 import { initProgress } from './controllers/progress.controller.js';
 import { initPlayerProfile } from './controllers/player-profile.controller.js';
 
+function initOptionalMediaFallback() {
+    const optionalMedia = document.querySelectorAll('[data-optional-media]');
+    optionalMedia.forEach((media) => {
+        media.addEventListener('error', () => {
+            media.hidden = true;
+        });
+    });
+}
+
 function initApp() {
     initState();
+    initOptionalMediaFallback();
     initTheme();
     initScene();
     initChapterObserver();

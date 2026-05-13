@@ -5,7 +5,9 @@ import { chapters } from '../config/chapters.js';
 let navItems = null;
 
 function scrollToChapter(chapterId) {
-    const element = document.getElementById(chapterId);
+    const stepElement = document.getElementById(`step-${chapterId}`);
+    const chapterElement = document.getElementById(chapterId);
+    const element = stepElement || chapterElement;
     if (element) {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         element.scrollIntoView({
