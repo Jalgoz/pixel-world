@@ -49,7 +49,7 @@
 }
 
 .chapter-nav__item:hover {
-    transform: scale(1.3);
+    transform: scale(1.08);
 }
 
 .progress-bar__fill {

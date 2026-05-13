@@ -5,6 +5,27 @@ import { setSelectedProfile } from '../state/story-state.js';
 
 let profileOptions = null;
 let resultContainer = null;
+let showcaseElement = null;
+let showcaseImage = null;
+
+const profileMediaMap = {
+    explorador: {
+        src: 'assets/illustrations/profile-explorador.svg',
+        alt: 'Visual del perfil explorador'
+    },
+    competitivo: {
+        src: 'assets/illustrations/profile-competitivo.svg',
+        alt: 'Visual del perfil competitivo'
+    },
+    creativo: {
+        src: 'assets/illustrations/profile-creativo.svg',
+        alt: 'Visual del perfil creativo'
+    },
+    narrativo: {
+        src: 'assets/illustrations/profile-narrativo.svg',
+        alt: 'Visual del perfil narrativo'
+    }
+};
 
 function createResultContent(profile) {
     const title = document.createElement('h3');
@@ -36,11 +57,25 @@ function showProfileResult(profileId) {
     setSelectedProfile(profileId);
 }
 
+function updateShowcase(profileId) {
+    const media = profileMediaMap[profileId];
+    if (!media || !showcaseImage || !showcaseElement) return;
+
+    showcaseElement.classList.add('is-changing');
+    showcaseImage.src = media.src;
+    showcaseImage.alt = media.alt;
+
+    window.setTimeout(() => {
+        showcaseElement.classList.remove('is-changing');
+    }, 220);
+}
+
 function selectProfile(option) {
     const profileId = option.dataset.profile;
     if (!profileId) return;
 
     updateSelectedOption(profileId);
+    updateShowcase(profileId);
     showProfileResult(profileId);
     resultContainer?.focus({ preventScroll: true });
 }
@@ -56,6 +91,8 @@ function focusOptionByOffset(currentOption, offset) {
 export function initPlayerProfile() {
     profileOptions = [...document.querySelectorAll('.profile-option')];
     resultContainer = document.querySelector('.profile-result');
+    showcaseElement = document.querySelector('.profile-showcase');
+    showcaseImage = document.querySelector('[data-profile-media]');
 
     if (!profileOptions.length) return;
 

@@ -5,10 +5,13 @@ import { chapters } from '../config/chapters.js';
 let navItems = null;
 
 function scrollToChapter(chapterId) {
-    const element = document.querySelector(`[data-chapter="${chapterId}"]`);
+    const element = document.getElementById(chapterId);
     if (element) {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        element.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        element.scrollIntoView({
+            behavior: prefersReducedMotion ? 'auto' : 'smooth',
+            block: 'center'
+        });
     }
 }
 

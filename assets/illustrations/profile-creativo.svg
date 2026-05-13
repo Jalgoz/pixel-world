@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" role="img" aria-label="Creativo">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#1b1120"/>
+      <stop offset="1" stop-color="#25132e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="700" fill="url(#bg)"/>
+  <g opacity="0.9">
+    <rect x="280" y="180" width="160" height="160" rx="14" fill="#fd79a8" opacity="0.65"/>
+    <rect x="460" y="250" width="220" height="220" rx="18" fill="#fd79a8" opacity="0.45"/>
+    <rect x="730" y="130" width="280" height="280" rx="20" fill="#fd79a8" opacity="0.35"/>
+    <rect x="1030" y="250" width="180" height="180" rx="14" fill="#fd79a8" opacity="0.6"/>
+  </g>
+  <g stroke="#fd79a8" stroke-width="3" fill="none" opacity="0.8">
+    <path d="M360 260 C520 120, 620 490, 820 260"/>
+    <path d="M560 360 C720 220, 910 520, 1150 300"/>
+  </g>
+</svg>

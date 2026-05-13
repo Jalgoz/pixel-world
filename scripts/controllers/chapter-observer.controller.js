@@ -29,7 +29,7 @@ function handleChapterIntersect(entries) {
 }
 
 export function initChapterObserver() {
-    const chapterElements = document.querySelectorAll('[data-chapter]');
+    const chapterElements = document.querySelectorAll('.chapter[data-chapter]');
 
     if (!chapterElements.length) return;
 
