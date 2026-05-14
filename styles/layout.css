@@ -421,10 +421,16 @@
     color: var(--color-text-secondary);
 }
 
-.final-section .grid {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: var(--content-max-width);
+.profile-composer {
+    position: relative;
     width: 100%;
+    max-width: var(--content-max-width);
+}
+
+.profile-options {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1), gap 520ms ease;
 }
 
 .profile-option {
@@ -437,8 +443,8 @@
     border: 2px solid var(--color-border);
     border-radius: var(--radius-lg);
     cursor: pointer;
-    transition: all var(--transition-normal);
-    font-size: var(--font-size-lg);
+    transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1), padding 420ms ease, background 260ms ease, border-color 260ms ease, box-shadow 260ms ease, color 260ms ease;
+    font-size: clamp(1rem, 0.9rem + 0.35vw, 1.25rem);
     font-weight: 600;
 }
 
@@ -480,10 +486,51 @@
     color: var(--theme-accent);
 }
 
+.profile-composer--revealed {
+    min-height: clamp(27rem, 74vh, 42rem);
+}
+
+.profile-composer--revealed .profile-options {
+    position: absolute;
+    inset: var(--space-4);
+    z-index: 3;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(7rem, 10rem));
+    grid-template-rows: repeat(2, auto);
+    justify-content: space-between;
+    align-content: space-between;
+    gap: var(--space-3);
+    pointer-events: none;
+}
+
+.profile-composer--revealed .profile-option {
+    min-height: auto;
+    padding: 0.8rem 1rem;
+    gap: 0.45rem;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.24);
+    background: rgba(7, 8, 14, 0.58);
+    box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.24);
+    color: rgba(255, 255, 255, 0.84);
+    font-size: var(--font-size-sm);
+    backdrop-filter: blur(14px);
+    pointer-events: auto;
+}
+
+.profile-composer--revealed .profile-option__icon {
+    width: 1.15rem;
+    height: 1.15rem;
+}
+
+.profile-composer--revealed .profile-option--selected {
+    border-color: var(--theme-accent);
+    background: color-mix(in srgb, var(--theme-accent) 18%, rgba(7, 8, 14, 0.68));
+}
+
 .profile-showcase {
     position: relative;
     width: 100%;
-    max-width: 56rem;
+    min-height: clamp(27rem, 74vh, 42rem);
     margin: var(--space-6) auto 0;
     border-radius: var(--radius-lg);
     overflow: hidden;
@@ -492,9 +539,10 @@
         linear-gradient(135deg, #101827, #151526);
     box-shadow: var(--shadow-panel);
     opacity: 0;
-    transform: translateY(2rem) scale(0.97);
-    filter: blur(14px);
-    transition: opacity 700ms ease, transform 800ms cubic-bezier(0.16, 1, 0.3, 1), filter 800ms ease;
+    transform: scale(0.82);
+    filter: blur(10px);
+    transform-origin: center;
+    transition: opacity 360ms ease, transform 520ms cubic-bezier(0.16, 1, 0.3, 1), filter 520ms ease;
 }
 
 .profile-showcase[hidden] {
@@ -528,11 +576,12 @@
 .profile-showcase__media {
     display: block;
     width: 100%;
-    aspect-ratio: 16 / 7;
+    height: 100%;
+    min-height: clamp(27rem, 74vh, 42rem);
     object-fit: cover;
     opacity: 0;
-    transform: scale(1.08);
-    transition: opacity 900ms ease, transform 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform: scale(1.06);
+    transition: opacity 420ms ease, transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .profile-showcase.is-visible .profile-showcase__media {
@@ -553,12 +602,12 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: var(--space-8);
+    padding: var(--space-8) clamp(7rem, 15vw, 13rem);
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.68));
     pointer-events: none;
     opacity: 0;
     transform: translateY(1rem);
-    transition: opacity 700ms ease 160ms, transform 800ms cubic-bezier(0.16, 1, 0.3, 1) 160ms;
+    transition: opacity 360ms ease 100ms, transform 480ms cubic-bezier(0.16, 1, 0.3, 1) 100ms;
 }
 
 .profile-showcase.is-visible .profile-showcase__overlay {
@@ -567,7 +616,7 @@
 }
 
 .profile-showcase__title {
-    font-size: clamp(2.2rem, 4vw, 3.25rem);
+    font-size: clamp(1.9rem, 3vw, 2.65rem);
     font-weight: 700;
     color: #ffffff;
     line-height: 1.08;
@@ -575,7 +624,7 @@
 }
 
 .profile-showcase__desc {
-    font-size: clamp(1.12rem, 1.8vw, 1.45rem);
+    font-size: clamp(1rem, 1.35vw, 1.18rem);
     color: rgba(255, 255, 255, 0.78);
     max-width: 42rem;
     margin-bottom: 0;

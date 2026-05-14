@@ -207,36 +207,38 @@
             <div class="container">
                 <h2 id="profile-title">¿Qué tipo de jugador eres?</h2>
                 <p>Elige el perfil que mejor describe cómo vives la experiencia de juego.</p>
-                <div class="grid gap-4" role="group" aria-label="Perfiles de jugador">
-                    <button class="profile-option" type="button" data-profile="explorador" aria-pressed="false">
-                        <svg class="profile-option__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h3l2-9 4 18 2-9h3"/></svg>
-                        <span>Explorador</span>
-                    </button>
-                    <button class="profile-option" type="button" data-profile="competitivo" aria-pressed="false">
-                        <svg class="profile-option__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                        <span>Competitivo</span>
-                    </button>
-                    <button class="profile-option" type="button" data-profile="creativo" aria-pressed="false">
-                        <svg class="profile-option__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c1.5 0 2.9-.37 4.14-1.02"/><circle cx="12" cy="12" r="3"/><path d="M19 3v6"/><path d="M16 6h6"/></svg>
-                        <span>Creativo</span>
-                    </button>
-                    <button class="profile-option" type="button" data-profile="narrativo" aria-pressed="false">
-                        <svg class="profile-option__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-                        <span>Narrativo</span>
-                    </button>
-                </div>
-                <div class="profile-showcase" hidden>
-                    <img
-                        class="profile-showcase__media"
-                        src=""
-                        alt=""
-                        data-profile-media
-                        loading="lazy"
-                        hidden
-                    >
-                    <div class="profile-showcase__overlay">
-                        <h3 class="profile-showcase__title" data-overlay-title></h3>
-                        <p class="profile-showcase__desc" data-overlay-desc></p>
+                <div class="profile-composer">
+                    <div class="grid gap-4 profile-options" role="group" aria-label="Perfiles de jugador">
+                        <button class="profile-option" type="button" data-profile="explorador" aria-pressed="false">
+                            <svg class="profile-option__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12h3l2-9 4 18 2-9h3"/></svg>
+                            <span>Explorador</span>
+                        </button>
+                        <button class="profile-option" type="button" data-profile="competitivo" aria-pressed="false">
+                            <svg class="profile-option__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                            <span>Competitivo</span>
+                        </button>
+                        <button class="profile-option" type="button" data-profile="creativo" aria-pressed="false">
+                            <svg class="profile-option__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c1.5 0 2.9-.37 4.14-1.02"/><circle cx="12" cy="12" r="3"/><path d="M19 3v6"/><path d="M16 6h6"/></svg>
+                            <span>Creativo</span>
+                        </button>
+                        <button class="profile-option" type="button" data-profile="narrativo" aria-pressed="false">
+                            <svg class="profile-option__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+                            <span>Narrativo</span>
+                        </button>
+                    </div>
+                    <div class="profile-showcase" hidden>
+                        <img
+                            class="profile-showcase__media"
+                            src=""
+                            alt=""
+                            data-profile-media
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="profile-showcase__overlay">
+                            <h3 class="profile-showcase__title" data-overlay-title></h3>
+                            <p class="profile-showcase__desc" data-overlay-desc></p>
+                        </div>
                     </div>
                 </div>
             </div>

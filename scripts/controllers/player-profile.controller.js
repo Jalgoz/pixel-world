@@ -4,6 +4,7 @@ import { playerProfiles } from '../config/chapters.js';
 import { setSelectedProfile } from '../state/story-state.js';
 
 let profileOptions = null;
+let profileComposer = null;
 let showcaseElement = null;
 let showcaseImage = null;
 let overlayTitle = null;
@@ -43,12 +44,14 @@ function updateShowcase(profileId) {
     showcaseElement.dataset.profileActive = profileId;
     showcaseElement.hidden = false;
     showcaseElement.classList.remove('is-visible');
+    profileComposer?.classList.add('profile-composer--revealed');
     showcaseImage.hidden = false;
     showcaseImage.src = media.src;
     showcaseImage.alt = media.alt;
 
     window.requestAnimationFrame(() => {
         showcaseElement.classList.add('is-visible');
+        showcaseElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 }
 
@@ -82,6 +85,7 @@ function focusOptionByOffset(currentOption, offset) {
 
 export function initPlayerProfile() {
     profileOptions = [...document.querySelectorAll('.profile-option')];
+    profileComposer = document.querySelector('.profile-composer');
     showcaseElement = document.querySelector('.profile-showcase');
     showcaseImage = document.querySelector('[data-profile-media]');
     overlayTitle = document.querySelector('[data-overlay-title]');
