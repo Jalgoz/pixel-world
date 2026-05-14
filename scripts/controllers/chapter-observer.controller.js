@@ -9,6 +9,8 @@ import { updateNavigation } from './navigation.controller.js';
 let activeChapterId = null;
 let observer = null;
 let observedTargets = [];
+let storySteps = null;
+let scrollFrame = null;
 
 function usesLinearStoryLayout() {
     return window.matchMedia('(max-width: 1024px)').matches;
@@ -40,6 +42,21 @@ function getCenteredTarget() {
     }, null)?.target;
 }
 
+function getDesktopScrollTarget() {
+    if (!storySteps || !observedTargets.length) return null;
+
+    const viewportCenter = window.innerHeight / 2;
+    const stepsTop = storySteps.getBoundingClientRect().top;
+    const firstStepHeight = observedTargets[0].getBoundingClientRect().height;
+    const progress = viewportCenter - stepsTop;
+    const targetIndex = Math.min(
+        Math.max(Math.floor(progress / firstStepHeight), 0),
+        observedTargets.length - 1
+    );
+
+    return observedTargets[targetIndex];
+}
+
 function activateChapter(chapterId) {
     if (!chapterId || chapterId === activeChapterId) return;
 
@@ -59,12 +76,27 @@ function handleChapterIntersect(entries) {
     const hasVisibleTarget = entries.some((entry) => entry.isIntersecting);
     if (!hasVisibleTarget) return;
 
-    activateChapter(getCenteredTarget()?.dataset?.chapter);
+    const target = usesLinearStoryLayout() ? getCenteredTarget() : getDesktopScrollTarget();
+    activateChapter(target?.dataset?.chapter);
+}
+
+function updateActiveChapterFromScroll() {
+    scrollFrame = null;
+
+    const target = usesLinearStoryLayout() ? getCenteredTarget() : getDesktopScrollTarget();
+    activateChapter(target?.dataset?.chapter);
+}
+
+function requestScrollUpdate() {
+    if (scrollFrame) return;
+
+    scrollFrame = window.requestAnimationFrame(updateActiveChapterFromScroll);
 }
 
 export function initChapterObserver() {
     const stepElements = document.querySelectorAll('.story-step[data-chapter]');
     const chapterElements = document.querySelectorAll('.chapter[data-chapter]');
+    storySteps = document.querySelector('.story-steps');
     observedTargets = Array.from(usesLinearStoryLayout() ? chapterElements : stepElements);
 
     if (!observedTargets.length) return;
@@ -81,10 +113,12 @@ export function initChapterObserver() {
         observer.observe(element);
     });
 
+    window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+
     if (!activeChapterId) {
         const initialChapter = chapterElements[0]?.dataset.chapter;
         if (initialChapter) {
-            updateChapterPanel(initialChapter);
+            activateChapter(initialChapter);
         }
     }
 }
@@ -94,4 +128,14 @@ export function destroyChapterObserver() {
         observer.disconnect();
         observer = null;
     }
+
+    window.removeEventListener('scroll', requestScrollUpdate);
+
+    if (scrollFrame) {
+        window.cancelAnimationFrame(scrollFrame);
+        scrollFrame = null;
+    }
+
+    observedTargets = [];
+    storySteps = null;
 }
