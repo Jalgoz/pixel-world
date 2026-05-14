@@ -41,9 +41,15 @@ function updateShowcase(profileId) {
     if (!media || !showcaseImage || !showcaseElement) return;
 
     showcaseElement.dataset.profileActive = profileId;
+    showcaseElement.hidden = false;
+    showcaseElement.classList.remove('is-visible');
     showcaseImage.hidden = false;
     showcaseImage.src = media.src;
     showcaseImage.alt = media.alt;
+
+    window.requestAnimationFrame(() => {
+        showcaseElement.classList.add('is-visible');
+    });
 }
 
 function updateOverlayText(profileId) {

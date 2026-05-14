@@ -491,6 +491,20 @@
         radial-gradient(ellipse at 25% 35%, rgba(78, 205, 196, 0.26), transparent 38%),
         linear-gradient(135deg, #101827, #151526);
     box-shadow: var(--shadow-panel);
+    opacity: 0;
+    transform: translateY(2rem) scale(0.97);
+    filter: blur(14px);
+    transition: opacity 700ms ease, transform 800ms cubic-bezier(0.16, 1, 0.3, 1), filter 800ms ease;
+}
+
+.profile-showcase[hidden] {
+    display: none;
+}
+
+.profile-showcase.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
 }
 
 .profile-showcase[data-profile-active="competitivo"] {
@@ -516,7 +530,14 @@
     width: 100%;
     aspect-ratio: 16 / 7;
     object-fit: cover;
-    transition: opacity var(--transition-normal), transform var(--transition-normal);
+    opacity: 0;
+    transform: scale(1.08);
+    transition: opacity 900ms ease, transform 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.profile-showcase.is-visible .profile-showcase__media {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .profile-showcase__media[hidden] {
@@ -535,6 +556,14 @@
     padding: var(--space-8);
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.68));
     pointer-events: none;
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: opacity 700ms ease 160ms, transform 800ms cubic-bezier(0.16, 1, 0.3, 1) 160ms;
+}
+
+.profile-showcase.is-visible .profile-showcase__overlay {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .profile-showcase__title {
