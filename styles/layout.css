@@ -116,6 +116,7 @@
 .story-area__content {
     position: relative;
     padding: var(--space-gutter);
+    padding-left: clamp(5rem, 6vw, 7rem);
     padding-right: var(--space-12);
     min-height: 100vh;
 }
@@ -128,7 +129,7 @@
 .chapter-panel {
     position: absolute;
     top: 50%;
-    left: var(--space-gutter);
+    left: clamp(5rem, 6vw, 7rem);
     right: var(--space-12);
     opacity: 0;
     transform: translateY(calc(-50% + 2.2rem)) scale(0.985);
@@ -256,15 +257,21 @@
 .chapter__media {
     display: none;
     margin: 0;
+    aspect-ratio: 16 / 9;
     border-radius: var(--radius-md);
     overflow: hidden;
     border: 1px solid var(--theme-border);
     position: relative;
+    background:
+        radial-gradient(ellipse at 70% 25%, var(--theme-accent-soft), transparent 42%),
+        linear-gradient(135deg, var(--color-bg-tertiary), var(--color-bg-primary));
 }
 
 .chapter__media-image {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    height: 100%;
     object-fit: cover;
     display: block;
 }
@@ -283,6 +290,7 @@
     color: #ffffff;
     font-size: var(--font-size-sm);
     background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.86));
+    z-index: 1;
 }
 
 /* Chapter Navigation */
@@ -589,6 +597,7 @@
     }
 
     .story-area__content {
+        padding-left: var(--space-gutter);
         padding-right: var(--space-gutter);
     }
 
@@ -610,6 +619,12 @@
         pointer-events: auto;
     }
 
+    .chapter-panel.is-active {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+
     .chapter-panel.card {
         background: var(--color-bg-secondary);
         border: 1px solid var(--color-border);
@@ -627,14 +642,11 @@
     }
 
     .story-area__scene {
-        position: sticky;
-        top: 0;
-        order: -1;
-        height: 42vh;
-        min-height: 20rem;
-        z-index: var(--z-base);
-        border-left: none;
-        border-bottom: 1px solid var(--color-border);
+        display: none;
+    }
+
+    .chapter__media {
+        display: block;
     }
 
     .chapter-nav {
@@ -688,10 +700,6 @@
         gap: var(--space-8);
     }
 
-    .story-area__scene {
-        display: none;
-    }
-
     .chapter {
         padding: var(--space-4);
         border-radius: var(--radius-md);
@@ -703,10 +711,6 @@
 
     .chapter__keywords {
         margin-bottom: var(--space-4);
-    }
-
-    .chapter__media {
-        display: block;
     }
 
     .chapter-nav {

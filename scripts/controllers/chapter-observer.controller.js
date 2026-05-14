@@ -9,6 +9,10 @@ import { updateNavigation } from './navigation.controller.js';
 let activeChapterId = null;
 let observer = null;
 
+function usesLinearStoryLayout() {
+    return window.matchMedia('(max-width: 1024px)').matches;
+}
+
 function updateChapterPanel(chapterId) {
     const panels = document.querySelectorAll('.chapter-panel[data-chapter-panel]');
     panels.forEach((panel) => {
@@ -44,7 +48,7 @@ function handleChapterIntersect(entries) {
 export function initChapterObserver() {
     const stepElements = document.querySelectorAll('.story-step[data-chapter]');
     const chapterElements = document.querySelectorAll('.chapter[data-chapter]');
-    const observerTargets = stepElements.length ? stepElements : chapterElements;
+    const observerTargets = usesLinearStoryLayout() ? chapterElements : stepElements;
 
     if (!observerTargets.length) return;
 

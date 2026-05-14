@@ -5,9 +5,10 @@ import { chapters } from '../config/chapters.js';
 let navItems = null;
 
 function scrollToChapter(chapterId) {
+    const usesLinearStoryLayout = window.matchMedia('(max-width: 1024px)').matches;
     const stepElement = document.getElementById(`step-${chapterId}`);
     const chapterElement = document.getElementById(chapterId);
-    const element = stepElement || chapterElement;
+    const element = usesLinearStoryLayout ? chapterElement : (stepElement || chapterElement);
     if (element) {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         element.scrollIntoView({
