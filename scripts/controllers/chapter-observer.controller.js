@@ -8,6 +8,7 @@ import { updateNavigation } from './navigation.controller.js';
 
 let activeChapterId = null;
 let observer = null;
+let observedTargets = [];
 
 function usesLinearStoryLayout() {
     return window.matchMedia('(max-width: 1024px)').matches;
@@ -21,16 +22,25 @@ function updateChapterPanel(chapterId) {
     });
 }
 
-function handleChapterIntersect(entries) {
-    const visibleEntries = entries.filter((entry) => entry.isIntersecting);
-    if (!visibleEntries.length) return;
+function getCenteredTarget() {
+    const viewportCenter = window.innerHeight / 2;
 
-    const bestEntry = visibleEntries.reduce((currentBest, entry) => {
-        if (!currentBest) return entry;
-        return entry.intersectionRatio > currentBest.intersectionRatio ? entry : currentBest;
-    }, null);
+    return observedTargets.reduce((currentBest, target) => {
+        const rect = target.getBoundingClientRect();
+        const targetCenter = rect.top + rect.height / 2;
+        const distanceFromCenter = Math.abs(targetCenter - viewportCenter);
+        const crossesViewportCenter = rect.top <= viewportCenter && rect.bottom >= viewportCenter;
+        const score = crossesViewportCenter ? 0 : distanceFromCenter;
 
-    const chapterId = bestEntry?.target?.dataset?.chapter;
+        if (!currentBest || score < currentBest.score) {
+            return { target, score };
+        }
+
+        return currentBest;
+    }, null)?.target;
+}
+
+function activateChapter(chapterId) {
     if (!chapterId || chapterId === activeChapterId) return;
 
     const chapter = chapters.find(c => c.id === chapterId);
@@ -45,22 +55,29 @@ function handleChapterIntersect(entries) {
     updateChapterPanel(chapterId);
 }
 
+function handleChapterIntersect(entries) {
+    const hasVisibleTarget = entries.some((entry) => entry.isIntersecting);
+    if (!hasVisibleTarget) return;
+
+    activateChapter(getCenteredTarget()?.dataset?.chapter);
+}
+
 export function initChapterObserver() {
     const stepElements = document.querySelectorAll('.story-step[data-chapter]');
     const chapterElements = document.querySelectorAll('.chapter[data-chapter]');
-    const observerTargets = usesLinearStoryLayout() ? chapterElements : stepElements;
+    observedTargets = Array.from(usesLinearStoryLayout() ? chapterElements : stepElements);
 
-    if (!observerTargets.length) return;
+    if (!observedTargets.length) return;
 
     const options = {
         root: null,
-        rootMargin: '-35% 0px -35% 0px',
-        threshold: [0, 0.2, 0.4, 0.6, 0.8, 1]
+        rootMargin: '0px',
+        threshold: [0]
     };
 
     observer = new IntersectionObserver(handleChapterIntersect, options);
 
-    observerTargets.forEach(element => {
+    observedTargets.forEach(element => {
         observer.observe(element);
     });
 
