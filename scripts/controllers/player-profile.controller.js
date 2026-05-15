@@ -47,10 +47,18 @@ function animateOptionsToOverlay() {
 
     profileComposer.offsetHeight;
 
-    profileOptions.forEach((option) => {
-        option.style.transition = '';
-        option.style.transform = '';
+    window.requestAnimationFrame(() => {
+        profileOptions.forEach((option) => {
+            option.style.transition = '';
+            option.style.transform = '';
+        });
     });
+}
+
+function setImageHoverState(isHovering) {
+    if (!profileComposer?.classList.contains('profile-composer--revealed')) return;
+
+    showcaseElement?.classList.toggle('profile-showcase--option-hovered', isHovering);
 }
 
 function updateSelectedOption(selectedProfileId) {
@@ -126,6 +134,8 @@ export function initPlayerProfile() {
 
     profileOptions.forEach(option => {
         option.addEventListener('click', () => selectProfile(option));
+        option.addEventListener('pointerenter', () => setImageHoverState(true));
+        option.addEventListener('pointerleave', () => setImageHoverState(false));
         option.addEventListener('keydown', (event) => {
             if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
                 event.preventDefault();

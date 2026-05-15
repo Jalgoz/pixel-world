@@ -464,7 +464,7 @@
     border: 2px solid var(--color-border);
     border-radius: var(--radius-lg);
     cursor: pointer;
-    transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1), padding 420ms ease, background 260ms ease, border-color 260ms ease, box-shadow 260ms ease, color 260ms ease;
+    transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1), padding 420ms ease, background 260ms ease, border-color 260ms ease, box-shadow 260ms ease, color 260ms ease;
     font-size: clamp(1rem, 0.9rem + 0.35vw, 1.25rem);
     font-weight: 600;
 }
@@ -577,6 +577,21 @@
     transition: opacity 260ms ease, transform 420ms cubic-bezier(0.16, 1, 0.3, 1), filter 320ms ease;
 }
 
+.profile-showcase::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.28);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 220ms ease;
+}
+
+.profile-showcase.profile-showcase--option-hovered::after {
+    opacity: 1;
+}
+
 .profile-composer--revealed .profile-showcase {
     margin-top: 0;
 }
@@ -635,6 +650,7 @@
 .profile-showcase__overlay {
     position: absolute;
     inset: 0;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
