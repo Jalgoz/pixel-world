@@ -12,6 +12,8 @@
     --theme-accent: var(--color-accent);
     --theme-accent-dim: var(--color-accent-dim);
     --theme-accent-soft: var(--color-accent-soft);
+    --theme-story-bg: rgba(0, 255, 170, 0.045);
+    --theme-story-bg-strong: rgba(0, 255, 170, 0.09);
     --theme-border: var(--color-border);
     --theme-border-light: var(--color-border-light);
     --theme-selection: var(--color-selection);
@@ -23,6 +25,8 @@ body[data-theme="chapter-1"] {
     --theme-accent: var(--color-chapter-1);
     --theme-accent-dim: #cc5555;
     --theme-accent-soft: rgba(255, 107, 107, 0.12);
+    --theme-story-bg: rgba(255, 107, 107, 0.045);
+    --theme-story-bg-strong: rgba(255, 107, 107, 0.1);
     --theme-gradient: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 107, 107, 0.15), transparent 50%);
 }
 
@@ -31,6 +35,8 @@ body[data-theme="chapter-2"] {
     --theme-accent: var(--color-chapter-2);
     --theme-accent-dim: #3eb3aa;
     --theme-accent-soft: rgba(78, 205, 196, 0.12);
+    --theme-story-bg: rgba(78, 205, 196, 0.045);
+    --theme-story-bg-strong: rgba(78, 205, 196, 0.1);
     --theme-gradient: radial-gradient(ellipse 80% 60% at 30% 20%, rgba(78, 205, 196, 0.12), transparent 40%),
                       radial-gradient(ellipse 60% 40% at 70% 80%, rgba(78, 205, 196, 0.08), transparent 30%);
 }
@@ -40,6 +46,8 @@ body[data-theme="chapter-3"] {
     --theme-accent: var(--color-chapter-3);
     --theme-accent-dim: #3593a8;
     --theme-accent-soft: rgba(69, 183, 209, 0.12);
+    --theme-story-bg: rgba(69, 183, 209, 0.045);
+    --theme-story-bg-strong: rgba(69, 183, 209, 0.1);
     --theme-gradient: linear-gradient(180deg,
         rgba(69, 183, 209, 0.1) 0%,
         transparent 40%,
@@ -52,6 +60,8 @@ body[data-theme="chapter-4"] {
     --theme-accent: var(--color-chapter-4);
     --theme-accent-dim: #8279cb;
     --theme-accent-soft: rgba(162, 155, 254, 0.12);
+    --theme-story-bg: rgba(162, 155, 254, 0.045);
+    --theme-story-bg-strong: rgba(162, 155, 254, 0.1);
     --theme-gradient: radial-gradient(circle at 20% 30%, rgba(162, 155, 254, 0.15), transparent 30%),
                       radial-gradient(circle at 80% 70%, rgba(162, 155, 254, 0.1), transparent 25%);
 }
@@ -61,6 +71,8 @@ body[data-theme="chapter-5"] {
     --theme-accent: var(--color-chapter-5);
     --theme-accent-dim: #cc6187;
     --theme-accent-soft: rgba(253, 121, 168, 0.12);
+    --theme-story-bg: rgba(253, 121, 168, 0.045);
+    --theme-story-bg-strong: rgba(253, 121, 168, 0.1);
     --theme-gradient: linear-gradient(135deg,
         rgba(253, 121, 168, 0.12) 0%,
         transparent 40%,
@@ -72,6 +84,8 @@ body[data-theme="chapter-6"] {
     --theme-accent: var(--color-chapter-6);
     --theme-accent-dim: #ccb985;
     --theme-accent-soft: rgba(255, 234, 167, 0.12);
+    --theme-story-bg: rgba(255, 234, 167, 0.045);
+    --theme-story-bg-strong: rgba(255, 234, 167, 0.1);
     --theme-gradient: radial-gradient(ellipse 100% 80% at 50% 100%, rgba(255, 234, 167, 0.15), transparent 50%),
                       radial-gradient(circle at 30% 20%, rgba(255, 234, 167, 0.1), transparent 20%);
 }
