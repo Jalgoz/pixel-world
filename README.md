@@ -31,6 +31,7 @@ La narrativa evita funcionar como una cronología histórica. En su lugar, prese
 - Interacción final de perfil de jugador con animación FLIP
 - Botones de perfil se desplazan a las esquinas de la imagen al seleccionar
 - Overlay hover en imagen de perfil
+- Preparado para secciones editoriales con video local
 - Soporte para teclado y `prefers-reduced-motion`
 - Diseño responsive para desktop, tablet y mobile
 
@@ -43,9 +44,12 @@ La narrativa evita funcionar como una cronología histórica. En su lugar, prese
 - JavaScript vanilla
 - ES Modules nativos
 - IntersectionObserver
+- Video HTML5 local
 - SVG para favicon
 
 Las imágenes de capítulos y perfiles deben agregarse como archivos JPG en `assets/images/`. Consultar `assets/images/README-chapter-media.txt` para nombres y dimensiones requeridas.
+
+Los videos editoriales deben agregarse como archivos MP4 en `assets/videos/`. Consultar `assets/videos/README-video-assets.txt` para nombres, posters y recomendaciones de peso.
 
 No usa frameworks, librerías UI, preprocesadores, TypeScript ni librerías de animación.
 
@@ -56,7 +60,8 @@ No usa frameworks, librerías UI, preprocesadores, TypeScript ni librerías de a
 │   ├── icons/
 │   ├── textures/
 │   ├── illustrations/
-│   └── images/
+│   ├── images/
+│   └── videos/
 ├── styles/
 │   ├── main.css
 │   ├── reset.css
@@ -102,7 +107,7 @@ No abras `index.html` directamente con `file://`, porque el navegador puede bloq
 
 ## Estado
 
-Proyecto completo en fase de pulido final.
+Proyecto completo en fase de pulido final, con estructura preparada para incorporar dos secciones editoriales con video.
 
 Incluye estructura, HTML semántico, sistema visual con tokens y temas, escenas por capítulo, animaciones CSS, comportamiento JavaScript modular con IntersectionObserver, responsive review, accesibilidad básica e interacción final de perfil con transiciones animadas.
 
