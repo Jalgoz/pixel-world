@@ -23,13 +23,14 @@ La narrativa evita funcionar como una cronología histórica. En su lugar, prese
 
 - Hero cinematográfico con entrada editorial
 - Narrativa scroll-driven con seis capítulos
-- Escena visual sticky en desktop
-- Escenas lineales integradas en mobile
-- Metáforas visuales abstractas creadas con CSS
-- Transiciones de tema por capítulo
+- Scrollytelling dos columnas en desktop: texto sticky + escena visual
+- Escenas lineales integradas en tablet y mobile
+- Fondos degradados por capítulo con transiciones suaves
 - Barra de progreso de lectura
 - Navegación de capítulos accesible
-- Interacción final de perfil de jugador
+- Interacción final de perfil de jugador con animación FLIP
+- Botones de perfil se desplazan a las esquinas de la imagen al seleccionar
+- Overlay hover en imagen de perfil
 - Soporte para teclado y `prefers-reduced-motion`
 - Diseño responsive para desktop, tablet y mobile
 
@@ -43,6 +44,8 @@ La narrativa evita funcionar como una cronología histórica. En su lugar, prese
 - ES Modules nativos
 - IntersectionObserver
 - SVG para favicon
+
+Las imágenes de capítulos y perfiles deben agregarse como archivos JPG en `assets/images/`. Consultar `assets/images/README-chapter-media.txt` para nombres y dimensiones requeridas.
 
 No usa frameworks, librerías UI, preprocesadores, TypeScript ni librerías de animación.
 
@@ -99,9 +102,9 @@ No abras `index.html` directamente con `file://`, porque el navegador puede bloq
 
 ## Estado
 
-Proyecto completo hasta la fase final de pulido.
+Proyecto completo en fase de pulido final.
 
-Incluye estructura, HTML, sistema visual, escenas, movimiento CSS, comportamiento JavaScript, responsive review, accesibilidad básica y README final.
+Incluye estructura, HTML semántico, sistema visual con tokens y temas, escenas por capítulo, animaciones CSS, comportamiento JavaScript modular con IntersectionObserver, responsive review, accesibilidad básica e interacción final de perfil con transiciones animadas.
 
 ## Licencia
 
