@@ -29,6 +29,30 @@ const profileMediaMap = {
     }
 };
 
+function animateOptionsToOverlay() {
+    if (!profileComposer || profileComposer.classList.contains('profile-composer--revealed')) return;
+
+    const previousRects = profileOptions.map(option => option.getBoundingClientRect());
+    profileComposer.classList.add('profile-composer--revealed', 'profile-composer--settled');
+
+    profileOptions.forEach((option, index) => {
+        const nextRect = option.getBoundingClientRect();
+        const previousRect = previousRects[index];
+        const deltaX = previousRect.left - nextRect.left;
+        const deltaY = previousRect.top - nextRect.top;
+
+        option.style.transition = 'none';
+        option.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+    });
+
+    profileComposer.offsetHeight;
+
+    profileOptions.forEach((option) => {
+        option.style.transition = '';
+        option.style.transform = '';
+    });
+}
+
 function updateSelectedOption(selectedProfileId) {
     profileOptions.forEach(option => {
         const isSelected = option.dataset.profile === selectedProfileId;
@@ -41,22 +65,21 @@ function updateShowcase(profileId) {
     const media = profileMediaMap[profileId];
     if (!media || !showcaseImage || !showcaseElement) return;
 
+    const isFirstReveal = showcaseElement.hidden;
+
     showcaseElement.dataset.profileActive = profileId;
     showcaseElement.hidden = false;
-    showcaseElement.classList.remove('is-visible');
-    profileComposer?.classList.remove('profile-composer--settled');
-    profileComposer?.classList.add('profile-composer--revealed');
+    animateOptionsToOverlay();
     showcaseImage.hidden = false;
     showcaseImage.src = media.src;
     showcaseImage.alt = media.alt;
 
-    window.requestAnimationFrame(() => {
-        showcaseElement.classList.add('is-visible');
+    if (isFirstReveal) {
         window.requestAnimationFrame(() => {
-            profileComposer?.classList.add('profile-composer--settled');
+            showcaseElement.classList.add('is-visible');
+            showcaseElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
-        showcaseElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
+    }
 }
 
 function updateOverlayText(profileId) {
