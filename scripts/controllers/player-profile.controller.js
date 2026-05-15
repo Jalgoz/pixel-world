@@ -29,6 +29,13 @@ const profileMediaMap = {
     }
 };
 
+function preloadProfileMedia() {
+    Object.values(profileMediaMap).forEach((media) => {
+        const image = new Image();
+        image.src = media.src;
+    });
+}
+
 function animateOptionsToOverlay() {
     if (!profileComposer || profileComposer.classList.contains('profile-composer--revealed')) return;
 
@@ -74,10 +81,19 @@ function updateShowcase(profileId) {
     if (!media || !showcaseImage || !showcaseElement) return;
 
     const isFirstReveal = showcaseElement.hidden;
+    const isAlreadyVisible = showcaseElement.classList.contains('is-visible');
 
     showcaseElement.dataset.profileActive = profileId;
     showcaseElement.hidden = false;
-    animateOptionsToOverlay();
+
+    if (isFirstReveal) {
+        animateOptionsToOverlay();
+    }
+
+    if (isAlreadyVisible) {
+        showcaseElement.classList.add('profile-showcase--instant');
+    }
+
     showcaseImage.hidden = false;
     showcaseImage.src = media.src;
     showcaseImage.alt = media.alt;
@@ -86,6 +102,15 @@ function updateShowcase(profileId) {
         window.requestAnimationFrame(() => {
             showcaseElement.classList.add('is-visible');
             showcaseElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+        return;
+    }
+
+    if (isAlreadyVisible) {
+        window.requestAnimationFrame(() => {
+            showcaseElement.classList.add('is-visible');
+            showcaseElement.classList.remove('is-loading');
+            showcaseElement.classList.remove('profile-showcase--instant');
         });
     }
 }
@@ -131,6 +156,8 @@ export function initPlayerProfile() {
     });
 
     if (!profileOptions.length) return;
+
+    preloadProfileMedia();
 
     profileOptions.forEach(option => {
         option.addEventListener('click', () => selectProfile(option));

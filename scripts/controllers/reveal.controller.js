@@ -50,6 +50,10 @@ function initControlledVideos() {
     const videos = document.querySelectorAll(controlledVideoSelector);
     if (!videos.length) return;
 
+    videos.forEach((video) => {
+        video.controls = false;
+    });
+
     if (prefersReducedMotion()) {
         videos.forEach((video) => {
             video.pause();
@@ -63,9 +67,7 @@ function initControlledVideos() {
             const video = entry.target;
 
             if (entry.isIntersecting) {
-                video.play().catch(() => {
-                    video.controls = true;
-                });
+                video.play().catch(() => {});
                 return;
             }
 
