@@ -35,6 +35,7 @@ La narrativa evita funcionar como una cronología histórica. En su lugar, prese
 - Sección editorial de video: “La pantalla dejó de ser un límite”
 - Sección de video inmersiva: “Mundos que parecen respirar”
 - Reveals al entrar en viewport para títulos, texto y video
+- Controlador reutilizable para reveals, stagger y reproducción de video en viewport
 - Soporte para teclado y `prefers-reduced-motion`
 - Diseño responsive para desktop, tablet y mobile
 

@@ -205,7 +205,7 @@
 
         <section class="video-editorial" aria-labelledby="world-video-title">
             <div class="container video-editorial__container">
-                <div class="video-editorial__copy">
+                <div class="video-editorial__copy" data-reveal-group>
                     <p class="tag" data-reveal>Intermedio visual</p>
                     <h2 id="world-video-title" data-reveal>La pantalla dejó de ser un límite</h2>
                     <p data-reveal>
@@ -222,6 +222,7 @@
                         loop
                         playsinline
                         data-optional-media
+                        data-controlled-video
                     >
                         <source src="assets/videos/world-evolution.mp4" type="video/mp4">
                     </video>
@@ -241,12 +242,13 @@
                 loop
                 playsinline
                 data-optional-media
+                data-controlled-video
             >
                 <source src="assets/videos/reactive-systems.mp4" type="video/mp4">
             </video>
 
             <div class="container systems-video__content">
-                <div class="systems-video__intro">
+                <div class="systems-video__intro" data-reveal-group>
                     <p class="tag" data-reveal>Sistemas vivos</p>
                     <h2 id="systems-video-title" data-reveal>Mundos que parecen respirar</h2>
                     <p data-reveal>
@@ -254,7 +256,7 @@
                     </p>
                 </div>
 
-                <div class="systems-video__cards" aria-label="Elementos de un mundo reactivo">
+                <div class="systems-video__cards" aria-label="Elementos de un mundo reactivo" data-reveal-group>
                     <article class="systems-card" data-reveal>
                         <span class="systems-card__number">01</span>
                         <h3>Decisión</h3>
