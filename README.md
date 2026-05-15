@@ -32,6 +32,8 @@ La narrativa evita funcionar como una cronología histórica. En su lugar, prese
 - Botones de perfil se desplazan a las esquinas de la imagen al seleccionar
 - Overlay hover en imagen de perfil
 - Preparado para secciones editoriales con video local
+- Sección editorial de video: “La pantalla dejó de ser un límite”
+- Reveals al entrar en viewport para títulos, texto y video
 - Soporte para teclado y `prefers-reduced-motion`
 - Diseño responsive para desktop, tablet y mobile
 
@@ -107,9 +109,9 @@ No abras `index.html` directamente con `file://`, porque el navegador puede bloq
 
 ## Estado
 
-Proyecto completo en fase de pulido final, con estructura preparada para incorporar dos secciones editoriales con video.
+Proyecto completo en fase de pulido final, con la primera sección editorial de video integrada.
 
-Incluye estructura, HTML semántico, sistema visual con tokens y temas, escenas por capítulo, animaciones CSS, comportamiento JavaScript modular con IntersectionObserver, responsive review, accesibilidad básica e interacción final de perfil con transiciones animadas.
+Incluye estructura, HTML semántico, sistema visual con tokens y temas, escenas por capítulo, animaciones CSS, comportamiento JavaScript modular con IntersectionObserver, sección editorial de video, responsive review, accesibilidad básica e interacción final de perfil con transiciones animadas.
 
 ## Licencia
 

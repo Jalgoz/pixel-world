@@ -8,6 +8,7 @@ import { initScene } from './controllers/scene.controller.js';
 import { initNavigation } from './controllers/navigation.controller.js';
 import { initProgress } from './controllers/progress.controller.js';
 import { initPlayerProfile } from './controllers/player-profile.controller.js';
+import { initReveal } from './controllers/reveal.controller.js';
 
 function initOptionalMediaFallback() {
     const optionalMedia = document.querySelectorAll('[data-optional-media]');
@@ -27,6 +28,7 @@ function initApp() {
     initNavigation();
     initProgress();
     initPlayerProfile();
+    initReveal();
 }
 
 document.addEventListener('DOMContentLoaded', initApp);

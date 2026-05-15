@@ -60,6 +60,35 @@
     transition: background var(--transition-fast), color var(--transition-fast);
 }
 
+/* ============ Scroll Reveal Motion ============ */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(1.75rem);
+    transition: opacity 650ms ease, transform 750ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.video-editorial__copy [data-reveal]:nth-child(2) {
+    transition-delay: 90ms;
+}
+
+.video-editorial__copy [data-reveal]:nth-child(3) {
+    transition-delay: 180ms;
+}
+
+.video-editorial__frame[data-reveal] {
+    transform: translateY(2rem) scale(0.96);
+    transition: opacity 700ms ease 140ms, transform 850ms cubic-bezier(0.16, 1, 0.3, 1) 140ms;
+}
+
+.video-editorial__frame[data-reveal].is-visible {
+    transform: translateY(0) scale(1);
+}
+
 /* ============ Reduced Motion ============ */
 @media (prefers-reduced-motion: reduce) {
     *,
