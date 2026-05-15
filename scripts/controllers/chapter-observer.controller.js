@@ -46,7 +46,7 @@ function getCenteredTarget() {
 function getDesktopScrollTarget() {
     if (!storyArea || !observedTargets.length) return null;
 
-    const storyTop = storyArea.getBoundingClientRect().top + window.scrollY;
+    const storyTop = (storySteps || storyArea).getBoundingClientRect().top + window.scrollY;
     const firstStepHeight = observedTargets[0].getBoundingClientRect().height;
     const progress = window.scrollY - storyTop;
     const targetIndex = Math.min(

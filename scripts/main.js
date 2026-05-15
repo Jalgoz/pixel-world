@@ -9,6 +9,7 @@ import { initNavigation } from './controllers/navigation.controller.js';
 import { initProgress } from './controllers/progress.controller.js';
 import { initPlayerProfile } from './controllers/player-profile.controller.js';
 import { initReveal } from './controllers/reveal.controller.js';
+import { initFooterSignal } from './controllers/footer-signal.controller.js';
 
 function initOptionalMediaFallback() {
     const optionalMedia = document.querySelectorAll('[data-optional-media]');
@@ -29,6 +30,7 @@ function initApp() {
     initProgress();
     initPlayerProfile();
     initReveal();
+    initFooterSignal();
 }
 
 document.addEventListener('DOMContentLoaded', initApp);

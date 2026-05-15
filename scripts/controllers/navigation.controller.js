@@ -3,9 +3,28 @@
 import { chapters } from '../config/chapters.js';
 import { updateScene } from './scene.controller.js';
 import { updateTheme } from './theme.controller.js';
-import { setIsNavigating } from '../state/story-state.js';
+import { setActiveChapter, setIsNavigating } from '../state/story-state.js';
 
 let navItems = null;
+let navigationTimeout = null;
+
+function updateChapterPanel(chapterId) {
+    const panels = document.querySelectorAll('.chapter-panel[data-chapter-panel]');
+    panels.forEach((panel) => {
+        panel.classList.toggle('is-active', panel.dataset.chapterPanel === chapterId);
+    });
+}
+
+function applySelectedChapter(chapterId) {
+    const chapter = chapters.find(c => c.id === chapterId);
+    if (!chapter) return;
+
+    setActiveChapter(chapterId);
+    updateNavigation(chapterId);
+    updateTheme(chapter.theme);
+    updateScene(chapter.scene);
+    updateChapterPanel(chapterId);
+}
 
 function scrollToChapter(chapterId) {
     const usesLinearStoryLayout = window.matchMedia('(max-width: 1024px)').matches;
@@ -14,24 +33,23 @@ function scrollToChapter(chapterId) {
     const element = usesLinearStoryLayout ? chapterElement : (stepElement || chapterElement);
     if (element) {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (navigationTimeout) {
+            window.clearTimeout(navigationTimeout);
+        }
+
         setIsNavigating(true);
+        applySelectedChapter(chapterId);
+
         element.scrollIntoView({
             behavior: prefersReducedMotion ? 'auto' : 'smooth',
-            block: 'center'
+            block: usesLinearStoryLayout ? 'center' : 'start'
         });
 
-        const chapter = chapters.find(c => c.id === chapterId);
-        if (chapter) {
-            setTimeout(() => {
-                setIsNavigating(false);
-                updateTheme(chapter.theme);
-                updateScene(chapter.scene);
-                const panels = document.querySelectorAll('.chapter-panel[data-chapter-panel]');
-                panels.forEach((panel) => {
-                    panel.classList.toggle('is-active', panel.dataset.chapterPanel === chapterId);
-                });
-            }, prefersReducedMotion ? 50 : 600);
-        }
+        navigationTimeout = window.setTimeout(() => {
+            setIsNavigating(false);
+            applySelectedChapter(chapterId);
+            navigationTimeout = null;
+        }, prefersReducedMotion ? 50 : 700);
     }
 }
 
