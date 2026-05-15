@@ -1,7 +1,7 @@
 // Chapter Observer Controller - Detects active chapter via IntersectionObserver
 
 import { chapters } from '../config/chapters.js';
-import { setActiveChapter } from '../state/story-state.js';
+import { setActiveChapter, getIsNavigating } from '../state/story-state.js';
 import { updateTheme } from './theme.controller.js';
 import { updateScene } from './scene.controller.js';
 import { updateNavigation } from './navigation.controller.js';
@@ -73,6 +73,8 @@ function activateChapter(chapterId) {
 }
 
 function handleChapterIntersect(entries) {
+    if (getIsNavigating()) return;
+
     const hasVisibleTarget = entries.some((entry) => entry.isIntersecting);
     if (!hasVisibleTarget) return;
 
@@ -81,6 +83,11 @@ function handleChapterIntersect(entries) {
 }
 
 function updateActiveChapterFromScroll() {
+    if (getIsNavigating()) {
+        scrollFrame = null;
+        return;
+    }
+
     scrollFrame = null;
 
     const target = usesLinearStoryLayout() ? getCenteredTarget() : getDesktopScrollTarget();

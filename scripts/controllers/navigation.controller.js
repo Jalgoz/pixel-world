@@ -1,6 +1,9 @@
 // Navigation Controller - Controls chapter navigation links and active state
 
 import { chapters } from '../config/chapters.js';
+import { updateScene } from './scene.controller.js';
+import { updateTheme } from './theme.controller.js';
+import { setIsNavigating } from '../state/story-state.js';
 
 let navItems = null;
 
@@ -11,10 +14,24 @@ function scrollToChapter(chapterId) {
     const element = usesLinearStoryLayout ? chapterElement : (stepElement || chapterElement);
     if (element) {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        setIsNavigating(true);
         element.scrollIntoView({
             behavior: prefersReducedMotion ? 'auto' : 'smooth',
             block: 'center'
         });
+
+        const chapter = chapters.find(c => c.id === chapterId);
+        if (chapter) {
+            setTimeout(() => {
+                setIsNavigating(false);
+                updateTheme(chapter.theme);
+                updateScene(chapter.scene);
+                const panels = document.querySelectorAll('.chapter-panel[data-chapter-panel]');
+                panels.forEach((panel) => {
+                    panel.classList.toggle('is-active', panel.dataset.chapterPanel === chapterId);
+                });
+            }, prefersReducedMotion ? 50 : 600);
+        }
     }
 }
 

@@ -7,7 +7,8 @@ const state = {
     activeScene: getChapterById(defaultChapterId)?.scene || null,
     activeTheme: getChapterById(defaultChapterId)?.theme || null,
     selectedProfile: null,
-    prefersReducedMotion: false
+    prefersReducedMotion: false,
+    isNavigating: false
 };
 
 const subscribers = new Set();
@@ -63,6 +64,14 @@ export function setPrefersReducedMotion(value) {
     const prefersReducedMotion = Boolean(value);
     if (state.prefersReducedMotion === prefersReducedMotion) return;
     updateState({ prefersReducedMotion });
+}
+
+export function setIsNavigating(value) {
+    state.isNavigating = Boolean(value);
+}
+
+export function getIsNavigating() {
+    return state.isNavigating;
 }
 
 export function initState() {
