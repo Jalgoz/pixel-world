@@ -44,6 +44,7 @@ function updateShowcase(profileId) {
     showcaseElement.dataset.profileActive = profileId;
     showcaseElement.hidden = false;
     showcaseElement.classList.remove('is-visible');
+    profileComposer?.classList.remove('profile-composer--settled');
     profileComposer?.classList.add('profile-composer--revealed');
     showcaseImage.hidden = false;
     showcaseImage.src = media.src;
@@ -51,6 +52,9 @@ function updateShowcase(profileId) {
 
     window.requestAnimationFrame(() => {
         showcaseElement.classList.add('is-visible');
+        window.requestAnimationFrame(() => {
+            profileComposer?.classList.add('profile-composer--settled');
+        });
         showcaseElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 }
