@@ -9,6 +9,7 @@ import { updateNavigation } from './navigation.controller.js';
 let activeChapterId = null;
 let observer = null;
 let observedTargets = [];
+let storyArea = null;
 let storySteps = null;
 let scrollFrame = null;
 
@@ -43,11 +44,11 @@ function getCenteredTarget() {
 }
 
 function getDesktopScrollTarget() {
-    if (!storySteps || !observedTargets.length) return null;
+    if (!storyArea || !observedTargets.length) return null;
 
-    const stepsTop = storySteps.getBoundingClientRect().top + window.scrollY;
+    const storyTop = storyArea.getBoundingClientRect().top + window.scrollY;
     const firstStepHeight = observedTargets[0].getBoundingClientRect().height;
-    const progress = window.scrollY - stepsTop;
+    const progress = window.scrollY - storyTop;
     const targetIndex = Math.min(
         Math.max(Math.floor(progress / firstStepHeight), 0),
         observedTargets.length - 1
@@ -95,6 +96,7 @@ function requestScrollUpdate() {
 export function initChapterObserver() {
     const stepElements = document.querySelectorAll('.story-step[data-chapter]');
     const chapterElements = document.querySelectorAll('.chapter[data-chapter]');
+    storyArea = document.querySelector('.story-area');
     storySteps = document.querySelector('.story-steps');
     observedTargets = Array.from(usesLinearStoryLayout() ? chapterElements : stepElements);
 
@@ -136,5 +138,6 @@ export function destroyChapterObserver() {
     }
 
     observedTargets = [];
+    storyArea = null;
     storySteps = null;
 }
