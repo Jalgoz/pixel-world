@@ -410,12 +410,10 @@
     content: '';
     position: absolute;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1px;
-    height: 4rem;
-    background: linear-gradient(180deg, var(--theme-accent), transparent);
-    opacity: 0.4;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
 }
 
 .final-section h2 {
