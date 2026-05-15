@@ -1139,8 +1139,15 @@
         height: 1rem;
     }
 
+    .profile-composer {
+        width: calc(100% + (var(--space-4) * 2));
+        margin-left: calc(var(--space-4) * -1);
+        margin-right: calc(var(--space-4) * -1);
+    }
+
     .profile-showcase {
         min-height: clamp(28rem, 72vh, 36rem);
+        border-radius: 0;
     }
 
     .profile-showcase__media {
@@ -1215,5 +1222,11 @@
 
     .chapter {
         padding: var(--space-3);
+    }
+
+    .profile-composer {
+        width: calc(100% + (var(--space-3) * 2));
+        margin-left: calc(var(--space-3) * -1);
+        margin-right: calc(var(--space-3) * -1);
     }
 }
